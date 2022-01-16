@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ePager.Data.Persistant;
 
@@ -11,9 +12,10 @@ using ePager.Data.Persistant;
 namespace WebAPIePager.Migrations
 {
     [DbContext(typeof(EPagerDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220116042053_update tables")]
+    partial class updatetables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +89,7 @@ namespace WebAPIePager.Migrations
 
                     b.HasIndex("MessageId");
 
-                    b.ToTable("MessageHistories");
+                    b.ToTable("MessageHitories");
                 });
 
             modelBuilder.Entity("ePager.Domain.Models.Shop", b =>

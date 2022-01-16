@@ -49,7 +49,7 @@ namespace WebAPIePager
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIePager", Version = "v1" });
             });
             services.AddDbContext<EPagerDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AdDBConnection"))
+                options.UseSqlServer(Configuration.GetConnectionString("AdDBConnection"), x => x.MigrationsAssembly("ePager.API"))
             );
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IVisitorRepository, VisitorRepository>();

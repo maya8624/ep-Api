@@ -16,7 +16,7 @@ namespace ePager.Data.Persistant
         }
 
         public DbSet<Message>? Messages { get; set; }
-        public DbSet<MessageHistory>? MessageHitories { get; set; }
+        public DbSet<MessageHistory>? MessageHistories { get; set; }
         public DbSet<Shop>? Shops { get; set; }
         public DbSet<Visitor>? Visitors { get; set; }
     }
