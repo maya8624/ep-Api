@@ -22,16 +22,15 @@ variables:
 
 steps:
 - task: UseDotNet@2
-<<<<<<< HEAD
-    displayName: 'Install .NET Core SDK'
-    inputs:
-      version: '6.x'
-      performMultiLevelLookup: true
-      includePreviewVersions: true  # Required for preview versions
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: '6.x'
+    performMultiLevelLookup: true
+    includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restore Nuget Packages'
   inputs:
-    displayName:'restore nuget packages'
     command: 'restore'
     feedToUse: 'select'
 
@@ -41,13 +40,6 @@ steps:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)' # Update this to match your need
-=======
-  inputs:
-    packageType: 'sdk'
-    version: '6.0'
-    
-- task: NuGetToolInstaller@1
->>>>>>> 61f089ab06612b71ffc298d0591e1f7bc8214abd
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
