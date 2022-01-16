@@ -2,7 +2,6 @@
 using ePager.Data.Persistant;
 using ePager.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace ePager.Data.Repositories
 {
@@ -15,12 +14,7 @@ namespace ePager.Data.Repositories
             _context = context;
         }
 
-        public async Task CreateMessage(Message message)
-        {
-            await _context.AddAsync(message);
-        }
-
-        public async Task<Message> GetByOrderNoAsync(int shopId, string orderNo)
+        public async Task<Message> GetByShopIdAndOrderNo(int shopId, string orderNo)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.ShopId == shopId && m.OrderNo == orderNo);
         }
