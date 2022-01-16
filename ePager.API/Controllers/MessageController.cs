@@ -25,41 +25,42 @@ namespace WebAPIePager.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("message-by-orderno")]
-        public async Task<Message> GetMessage(int shopId, string orderNo)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        [HttpGet("message-by-shopid-orderno")]
+        public async Task<ActionResult<Message>> GetByShopIdAndOrderNo(int shopId, string orderNo)
         {
             // CHECK: check possibility of duplicate order numbers.
-
-            //return new Message
-            //{
-            //    Id = 1,
-            //    Count = 0,
-            //    Name = "Andy",
-            //    Image = "cake.png",
-            //    OrderNo = "Order No: 20211203-01",
-            //    Text = "Order No.: 2021-12-03-01 is ready to pick up.",
-            //    Status = MessageStatus.Created,
-            //    CreatedOn = DateTimeOffset.UtcNow,
-            //};
-
-            var result = await _repository.GetByOrderNoAsync(shopId, orderNo);
-            return result;
+            return await _repository.GetByShopIdAndOrderNo(shopId, orderNo);
         }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPost("create-meessage")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("create-message")]
         public async Task PostMessage(Message message)
         {
+            var result = await GetByShopIdAndOrderNo(message.ShopId, message.OrderNo);
+            if (result is not null) return;
+            
             await _repository.CreateAsync(message);
             await _unitOfWork.CompleteAsync();
+
+            // return MessageReadDto?
         }
 
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("update-message")]
         public async Task PutMessage(Message message)
         {
+            var existingMessage = GetByShopIdAndOrderNo(message.ShopId, message.OrderNo);
+            if (existingMessage is null)
+            {
+                return;
+            }
+
             _repository.Update(message);
             await _unitOfWork.CompleteAsync();
         }

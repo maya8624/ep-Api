@@ -12,8 +12,9 @@ using ePager.Data.Persistant;
 
 namespace WebAPIePager.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class VisitorController : Controller
+    public class VisitorController : ControllerBase
     {
         private readonly ILogger<VisitorController> _logger;
         private readonly IMessageRepository _messageRepository;
@@ -33,7 +34,9 @@ namespace WebAPIePager.Controllers
         }
 
         [HttpPost("create-visitor")]
-        public async Task PostVisitor([FromBody] Visitor visitor)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> PostVisitor([FromBody] Visitor visitor)
         {
             try
             {
@@ -42,8 +45,8 @@ namespace WebAPIePager.Controllers
                     CreatedOn = DateTimeOffset.UtcNow,
                     OrderNo = visitor.OrderNo,
                     Name = visitor.Name,
-                    Recipient = visitor.Mobile,
-                    Status = MessageStatus.Created,
+                    //Recipient = visitor.Mobile,
+                    //Status = MessageStatus.Created,
                     ShopId = visitor.ShopId
                 };
 
@@ -52,6 +55,8 @@ namespace WebAPIePager.Controllers
                 await _messageRepository.CreateAsync(message);
                 await _visitorRepository.CreateAsync(visitor);
                 await _unitOfWork.CompleteAsync();
+
+                return Ok();
             }
             catch (Exception ex)
             {

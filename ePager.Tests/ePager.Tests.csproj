@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ePager.API\ePager.API.csproj" />
+    <ProjectReference Include="..\ePager.Data\ePager.Data.csproj" />
+  </ItemGroup>
+
 </Project>

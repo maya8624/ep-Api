@@ -21,19 +21,19 @@ namespace WebAPIePager.Services
             _repository = repository;
         }
 
-        public async Task CreateMessage(Message message)
-        {
-            await _repository.CreateAsync(message);
-        }
+        //public async Task CreateMessage(Message message)
+        //{
+        //    await _repository.CreateAsync(message);
+        //}
 
-        public async Task<Message> GetMessageByOrderNo(int shopId, string orderNo)
-        {
-            return await _repository.GetByOrderNoAsync(shopId, orderNo);
-        }
+        //public async Task<Message> GetMessageByOrderNo(int shopId, string orderNo)
+        //{
+        //    return await _repository.GetByOrderNoAsync(shopId, orderNo);
+        //}
         
-        public void UpdateMessage(Message message)
-        {
-            _repository.Update(message);
-        }
+        //public void UpdateMessage(Message message)
+        //{
+        //    _repository.Update(message);
+        //}
     }
 }

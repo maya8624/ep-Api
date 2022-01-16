@@ -5,6 +5,6 @@ namespace ePager.Data.Interfaces
 {
     public interface IMessageRepository : IRepositoryBase<Message>
     {
-        Task<Message> GetByOrderNoAsync(int shopId, string orderNo);
+        Task<Message> GetByShopIdAndOrderNo(int shopId, string orderNo);
     }
 }
