@@ -9,7 +9,7 @@ namespace ePager.Domain.Models
 
         public int Count { get; set; }
 
-        [Column("7")]
+        [Column(Order = 7)]
         public DateTimeOffset CreatedOn { get; set; }
 
         [Required]
