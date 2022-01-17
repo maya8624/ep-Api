@@ -40,8 +40,8 @@ namespace WebAPIePager.Controllers
         [HttpPost("create-message")]
         public async Task PostMessage(Message message)
         {
-            var result = await GetByShopIdAndOrderNo(message.ShopId, message.OrderNo);
-            if (result is not null) return;
+            //var result = await GetMessageByShopId(message.ShopId, message.OrderNo);
+            //if (result is not null) return;
             
             await _repository.CreateAsync(message);
             await _unitOfWork.CompleteAsync();
