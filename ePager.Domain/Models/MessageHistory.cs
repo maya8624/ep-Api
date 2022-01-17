@@ -12,7 +12,7 @@ namespace ePager.Domain.Models
     {
         public int Id { get; set; }
                 
-        [Column("5")]
+        [Column(Order = 5)]
         public DateTimeOffset CreatedOn { get; set; }
 
         public string? Icon { get; set; }

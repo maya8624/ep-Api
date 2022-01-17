@@ -27,7 +27,6 @@ namespace WebAPIePager.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
         [HttpGet("message-by-shopid-orderno")]
         public async Task<ActionResult<Message>> GetByShopIdAndOrderNo(int shopId, string orderNo)
         {
