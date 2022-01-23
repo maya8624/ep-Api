@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace ePager.Data.Persistant
+﻿namespace ePager.Data.Persistant
 {
     public interface IUnitOfWork
     {

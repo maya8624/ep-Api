@@ -11,7 +11,7 @@ using ePager.Data.Persistant;
 
 namespace WebAPIePager.Migrations
 {
-    [DbContext(typeof(EPagerDbContext))]
+    [DbContext(typeof(EPDbContext))]
     [Migration("20211219205724_Initial")]
     partial class Initial
     {

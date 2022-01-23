@@ -9,6 +9,7 @@ namespace ePager.Domain.Enums
 {
     public enum MessageStatus
     {
+        Created,
         Prep,
         Sent,
         Resent,

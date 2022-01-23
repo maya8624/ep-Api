@@ -11,7 +11,7 @@ using ePager.Data.Persistant;
 
 namespace WebAPIePager.Migrations
 {
-    [DbContext(typeof(EPagerDbContext))]
+    [DbContext(typeof(EPDbContext))]
     [Migration("20211219210412_Create ForeignKey Relationship")]
     partial class CreateForeignKeyRelationship
     {

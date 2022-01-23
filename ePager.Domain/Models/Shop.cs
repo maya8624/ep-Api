@@ -6,8 +6,10 @@
         
         public string? Name { get; set; }
         
-        public DateTimeOffset CreatedOn { get; set; }        
+        public DateTimeOffset CreatedOn { get; set; }
       
-        public ICollection<Message>? Message { get; set; }
+        public ICollection<Message>? Messages { get; set; }
+
+        public ICollection<Customer>? Customers { get; set; }
     }
 }

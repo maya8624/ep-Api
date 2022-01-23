@@ -1,21 +1,3 @@
-using ePager.Data.Interfaces;
-using ePager.Data.Persistant;
-using ePager.Data.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace WebAPIePager
 {
     public class Startup
@@ -30,30 +12,10 @@ namespace WebAPIePager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:3000")
-                                        .AllowAnyOrigin()
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod();                                  
-                    });
-            });
-
-            services.AddHttpClient();
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EP", Version = "v1" });
-            });
-            services.AddDbContext<EPagerDbContext>(options =>
+            services.AddServices();
+            services.AddDbContext<EPDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ePager.API"))
             );
-            services.AddScoped<IMessageRepository, MessageRepository>();
-            services.AddScoped<IVisitorRepository, VisitorRepository>();
-            services.AddScoped<IUnitOfWork, UnifOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

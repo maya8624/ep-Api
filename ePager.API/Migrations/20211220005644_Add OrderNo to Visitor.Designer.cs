@@ -11,7 +11,7 @@ using ePager.Data.Persistant;
 
 namespace WebAPIePager.Migrations
 {
-    [DbContext(typeof(EPagerDbContext))]
+    [DbContext(typeof(EPDbContext))]
     [Migration("20211220005644_Add OrderNo to Visitor")]
     partial class AddOrderNotoVisitor
     {

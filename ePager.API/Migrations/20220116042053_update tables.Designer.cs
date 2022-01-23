@@ -11,7 +11,7 @@ using ePager.Data.Persistant;
 
 namespace WebAPIePager.Migrations
 {
-    [DbContext(typeof(EPagerDbContext))]
+    [DbContext(typeof(EPDbContext))]
     [Migration("20220116042053_update tables")]
     partial class updatetables
     {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ePager.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ePager.Domain.Models
@@ -6,23 +7,16 @@ namespace ePager.Domain.Models
     public class Message
     {
         public int Id { get; set; }
-
-        public int Count { get; set; }
-
-        [Column(Order = 7)]
+                
+        [Column(Order = 5)]
         public DateTimeOffset CreatedOn { get; set; }
 
-        [Required]
-        public string Mobile { get; set; } = string.Empty;
+        public string? Icon { get; set; }
 
-        [Required]
-        public string Name { get; set; } = string.Empty;
-
-        [Required]
-        public string OrderNo { get; set; } = string.Empty;
+        public MessageStatus Status { get; set; }
 
         public int ShopId { get; set; }
 
-        public ICollection<MessageHistory>? History { get; set; }
+        public string? Text { get; set; }
     }
 }

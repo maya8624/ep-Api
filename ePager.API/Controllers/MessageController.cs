@@ -7,61 +7,60 @@ using ePager.Domain.Dtos;
 using ePager.Data.Interfaces;
 using ePager.Domain.Models;
 using ePager.Data.Persistant;
+using ePager.Data.Wrappers;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace WebAPIePager.Controllers
 {   
+    [ApiController]
     [Route("api/[controller]")]
-    public class MessageController : Controller
+    public class MessageController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly ILogger<MessageController> _logger;
-        private readonly IMessageRepository _repository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepositoryWrapper _wrapper;
 
-        public MessageController(ILogger<MessageController> logger, IMessageRepository repository, IUnitOfWork unitOfWork)
+        public MessageController(IMapper mapper, ILogger<MessageController> logger, IRepositoryWrapper wrapper)
         {
+            _mapper = mapper;
             _logger = logger;
-            _repository = repository;
-            _unitOfWork = unitOfWork;
+            _wrapper = wrapper;
         }
+                
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[HttpPost("create-message")]
+        //public async Task<IActionResult> PostMessage(MessageCreateDto messageCreateDto)
+        //{
+        //    //var result = await CheckAnyAsync(message.ShopId, message.OrderNo);
+        //    //if (result is not null) return;
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpGet("message-by-shopid-orderno")]
-        public async Task<ActionResult<Message>> GetByShopIdAndOrderNo(int shopId, string orderNo)
-        {
-            // CHECK: check possibility of duplicate order numbers.
-            return await _repository.GetByShopIdAndOrderNo(shopId, orderNo);
-        }
+        //    var message = _mapper.Map<Message>(messageCreateDto);            
+        //    var messageDetail = _mapper.Map<MessageDetail>(messageCreateDto.MessageDetail);
+        //    await _wrapper.Message.CreateAsync(message);
+        //    await _wrapper.MessageDetail.CreateAsync(messageDetail);
+        //    await _wrapper.UnitOfWork.CompleteAsync();
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Message))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("create-message")]
-        public async Task PostMessage(Message message)
-        {
-            //var result = await GetMessageByShopId(message.ShopId, message.OrderNo);
-            //if (result is not null) return;
-            
-            await _repository.CreateAsync(message);
-            await _unitOfWork.CompleteAsync();
+        //    return Ok();
+        //    // return MessageReadDto?
+        //}
 
-            // return MessageReadDto?
-        }
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[HttpPut("update-message")]
+        //public async Task PutMessage(MessageCreateDto messageCreateDto)
+        //{
+        //    var existingMessage = await _wrapper.Message.CheckAnyAsync(messageCreateDto.ShopId, messageCreateDto.OrderNo);
+        //    if (existingMessage is false)
+        //    {
+        //        return;
+        //    }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPut("update-message")]
-        public async Task PutMessage(Message message)
-        {
-            var existingMessage = GetByShopIdAndOrderNo(message.ShopId, message.OrderNo);
-            if (existingMessage is null)
-            {
-                return;
-            }
-
-            _repository.Update(message);
-            await _unitOfWork.CompleteAsync();
-        }
+        //    var message = _mapper.Map<Message>(messageCreateDto);
+        //    _wrapper.Message.Update(message);
+        //    await _wrapper.UnitOfWork.CompleteAsync();
+        //}
     }
 }
