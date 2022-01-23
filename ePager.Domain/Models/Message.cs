@@ -1,8 +1,4 @@
-﻿using ePager.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ePager.Domain.Models
+﻿namespace ePager.Domain.Models
 {
     public class Message
     {
