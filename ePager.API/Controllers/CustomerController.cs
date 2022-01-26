@@ -14,8 +14,7 @@
             _mapper = mapper;
             _wrapper = wrapper;
         }
-
-
+            
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -27,7 +26,7 @@
 
         }
 
-        [HttpPost("create-visitor")]
+        [HttpPost("create-customer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> PostCustomer([FromBody] CustomerCreateDto customerCreateDto)
