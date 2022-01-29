@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ePager.Domain\ePager.Domain.csproj" />
+    <ProjectReference Include="..\ep.Domain\ep.Domain.csproj" />
   </ItemGroup>
 
 </Project>

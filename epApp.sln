@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePager.API", "ePager.API\ePager.API.csproj", "{C04BA4A5-BF20-4CEA-94F6-F51618C72D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.API", "ep.API\ep.API.csproj", "{C04BA4A5-BF20-4CEA-94F6-F51618C72D89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePager.Tests", "ePager.Tests\ePager.Tests.csproj", "{2AEB999E-F802-406D-AEDF-C5CCD87F0DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.Tests", "ep.Tests\ep.Tests.csproj", "{2AEB999E-F802-406D-AEDF-C5CCD87F0DFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePager.Domain", "ePager.Domain\ePager.Domain.csproj", "{D8D7B9C0-E175-46FB-9795-C41A737A681F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.Domain", "ep.Domain\ep.Domain.csproj", "{D8D7B9C0-E175-46FB-9795-C41A737A681F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ePager.Data", "ePager.Data\ePager.Data.csproj", "{415682DE-48BE-4C65-9583-1BA58B2FC32B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.Data", "ep.Data\ep.Data.csproj", "{415682DE-48BE-4C65-9583-1BA58B2FC32B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
