@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ePager.Domain.Enums
+namespace ep.Domain.Enums
 {
     public enum MessageStatus
     {

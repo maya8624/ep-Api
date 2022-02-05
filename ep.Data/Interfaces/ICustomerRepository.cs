@@ -1,7 +1,7 @@
 ﻿
-using ePager.Domain.Models;
+using ep.Domain.Models;
 
-namespace ePager.Data.Interfaces
+namespace ep.Data.Interfaces
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {

@@ -1,54 +1,74 @@
-﻿namespace WebAPIePager.Controllers
+﻿using ep.Service.Interfaces;
+
+namespace ep.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly IMapper _mapper;
-        private readonly IRepositoryWrapper _wrapper;
+        private readonly ICustomerService _service;
 
-        public CustomerController(ILogger<CustomerController> logger, IMapper mapper, IRepositoryWrapper wrapper)
+        public CustomerController(ILogger<CustomerController> logger, ICustomerService service)
         {
             _logger = logger;
-            _mapper = mapper;
-            _wrapper = wrapper;
+            _service = service;
         }
-            
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("{id}", Name = "customer")]
+        public async Task<ActionResult<Customer>> GetCustomerById(int id)
+        {
+            return await _service.GetCustomerById(id);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("customers")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        {
+            var result = await _service.GetCustomers();
+            return Ok(result);
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{shopId}&{orderNo}", Name = "customer-by-shopid-orderno")]
         public async Task<ActionResult<Customer>> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo)
         {
-            // CHECK: check possibility of duplicate order numbers.
-            return await _wrapper.Customer.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
-
+            return await _service.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
         }
 
-        [HttpPost("create-customer")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("create")]
         public async Task<ActionResult> PostCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
             try
             {
-                var customer = _mapper.Map<Customer>(customerCreateDto);
-                customer.CreatedOn = DateTimeOffset.UtcNow;
-    
-                var message = new Message
-                {
-                    CreatedOn = DateTimeOffset.UtcNow,
-                    Icon = "create",
-                    ShopId = customer.ShopId,
-                    Status = MessageStatus.Created,
-                    Text = "Order: 1 - 2022011 has been received"
-                };
-
-                await _wrapper.Customer.CreateAsync(customer);
-                await _wrapper.Message.CreateAsync(message);
-                await _wrapper.UnitOfWork.CompleteAsync();
-
+                await _service.PostCustomerAsync(customerCreateDto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message, ex);
+                throw new Exception();
+            }
+        }
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPatch("update")]
+        public async Task<IActionResult> PatchCustomer([FromBody] CustomerCreateDto customerCreateDto)
+        {
+            try
+            {
+                
                 return Ok();
             }
             catch (Exception ex)

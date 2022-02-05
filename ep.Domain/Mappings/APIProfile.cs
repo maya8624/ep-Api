@@ -1,4 +1,6 @@
-﻿namespace ePager.Domain.Mappings
+﻿using ep.Domain.Dtos;
+
+namespace ep.Domain.Mappings
 {
     public class APIProfile : Profile
     {

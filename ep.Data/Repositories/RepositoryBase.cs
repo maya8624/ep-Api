@@ -1,4 +1,4 @@
-﻿namespace ePager.Data.Repositories
+﻿namespace ep.Data.Repositories
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
@@ -27,6 +27,11 @@
         public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
         {
             return _context.Set<T>().Where(expression).AsNoTracking();
+        }
+
+        public async Task<T> GetById(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public void Update(T entity)

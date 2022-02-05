@@ -9,11 +9,11 @@ using ep.Data.Persistant;
 
 #nullable disable
 
-namespace WebAPIePager.Migrations
+namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    [Migration("20211220005644_Add OrderNo to Visitor")]
-    partial class AddOrderNotoVisitor
+    [Migration("20220205004736_Add Customers Table")]
+    partial class AddCustomersTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace WebAPIePager.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("WebAPIePager.Models.Message", b =>
+            modelBuilder.Entity("ePager.Domain.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,22 +32,47 @@ namespace WebAPIePager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Mobile")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderNo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Recipient")
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("ePager.Domain.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnOrder(5);
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ShopId")
@@ -59,17 +84,16 @@ namespace WebAPIePager.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset>("UpdatedOn")
-                        .HasColumnType("datetimeoffset");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("ShopId");
 
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("WebAPIePager.Models.Shop", b =>
+            modelBuilder.Entity("ePager.Domain.Models.Shop", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,59 +112,38 @@ namespace WebAPIePager.Migrations
                     b.ToTable("Shops");
                 });
 
-            modelBuilder.Entity("WebAPIePager.Models.Visitor", b =>
+            modelBuilder.Entity("ePager.Domain.Models.Customer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ShopId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShopId");
-
-                    b.ToTable("Visitors");
+                    b.HasOne("ePager.Domain.Models.Shop", null)
+                        .WithMany("Customers")
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAPIePager.Models.Message", b =>
+            modelBuilder.Entity("ePager.Domain.Models.Message", b =>
                 {
-                    b.HasOne("WebAPIePager.Models.Shop", null)
+                    b.HasOne("ePager.Domain.Models.Customer", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("ePager.Domain.Models.Shop", null)
                         .WithMany("Messages")
                         .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAPIePager.Models.Visitor", b =>
-                {
-                    b.HasOne("WebAPIePager.Models.Shop", null)
-                        .WithMany("Visitors")
-                        .HasForeignKey("ShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WebAPIePager.Models.Shop", b =>
+            modelBuilder.Entity("ePager.Domain.Models.Customer", b =>
                 {
                     b.Navigation("Messages");
+                });
 
-                    b.Navigation("Visitors");
+            modelBuilder.Entity("ePager.Domain.Models.Shop", b =>
+                {
+                    b.Navigation("Customers");
+
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

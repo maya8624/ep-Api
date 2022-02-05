@@ -1,6 +1,7 @@
-﻿global using ePager.Data.Interfaces;
-global using ePager.Data.Persistant;
-global using ePager.Data.Repositories;
+﻿global using ep.Data.Interfaces;
+global using ep.Data.Persistant;
+global using ep.Data.Repositories;
+global using ep.Domain.Models;
 global using Microsoft.EntityFrameworkCore;
-global using ePager.Domain.Models;
 global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.Infrastructure;

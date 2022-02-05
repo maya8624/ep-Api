@@ -1,4 +1,4 @@
-﻿namespace ePager.Data.Wrappers
+﻿namespace ep.Data.Wrappers
 {
     public interface IRepositoryWrapper
     {

@@ -1,4 +1,4 @@
-﻿namespace ePager.Data.Persistant
+﻿namespace ep.Data.Persistant
 {
     public class UnitOfWork : IUnitOfWork
     {

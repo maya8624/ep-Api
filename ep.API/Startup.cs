@@ -1,4 +1,4 @@
-namespace WebAPIePager
+namespace ep.API
 {
     public class Startup
     {
@@ -14,7 +14,7 @@ namespace WebAPIePager
         {
             services.AddServices();
             services.AddDbContext<EPDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ePager.API"))
+                options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
             );
         }
 

@@ -1,4 +1,4 @@
-﻿namespace ePager.Data.Repositories
+﻿namespace ep.Data.Repositories
 {
     public class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
     {

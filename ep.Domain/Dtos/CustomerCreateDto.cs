@@ -1,4 +1,4 @@
-﻿namespace ePager.Domain.Dtos
+﻿namespace ep.Domain.Dtos
 {
     public class CustomerCreateDto
     {           

@@ -1,17 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-using ePager.Domain.Dtos;
-using ePager.Data.Interfaces;
-using ePager.Domain.Models;
-using ePager.Data.Persistant;
-using ePager.Data.Wrappers;
-using AutoMapper;
-using System.Collections.Generic;
-
-namespace WebAPIePager.Controllers
+﻿namespace ep.API.Controllers
 {   
     [ApiController]
     [Route("api/[controller]")]

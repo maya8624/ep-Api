@@ -1,10 +1,12 @@
 ﻿using System.Linq.Expressions;
 
-namespace ePager.Data.Interfaces
+namespace ep.Data.Interfaces
 {
     public interface IRepositoryBase<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
+
+        Task<T> GetById(int id);
 
         IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
 

@@ -1,9 +1,4 @@
-﻿using ePager.Data.Wrappers;
-using ePager.Domain.Mappings;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-
-namespace ePager.API.Extensions
+﻿namespace ep.API.Extensions
 {
     public static class ServiceExtensions
     { 
@@ -25,6 +20,8 @@ namespace ePager.API.Extensions
             services.AddHttpClient();
             services.AddControllers();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EP", Version = "v1" });

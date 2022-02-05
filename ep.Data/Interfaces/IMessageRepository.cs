@@ -1,7 +1,6 @@
-﻿using ePager.Domain.Models;
-using System.Threading.Tasks;
+﻿
 
-namespace ePager.Data.Interfaces
+namespace ep.Data.Interfaces
 {
     public interface IMessageRepository : IRepositoryBase<Message>
     {        

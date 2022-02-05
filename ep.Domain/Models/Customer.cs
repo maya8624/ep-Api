@@ -1,4 +1,4 @@
-﻿namespace ePager.Domain.Models
+﻿namespace ep.Domain.Models
 {
     public class Customer
     {

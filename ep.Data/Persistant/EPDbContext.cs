@@ -1,4 +1,4 @@
-﻿namespace ePager.Data.Persistant
+﻿namespace ep.Data.Persistant
 {
     public class EPDbContext : DbContext
     {
@@ -6,8 +6,8 @@
         {
         }
 
-        public DbSet<Message>? Messages { get; set; }
-        public DbSet<Shop>? Shops { get; set; }
-        public DbSet<Customer>? Customers{ get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<Customer> Customers{ get; set; }
     }
 }
