@@ -43,7 +43,7 @@ namespace ep.API.Controllers
             return await _service.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
         }
 
-        [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ShopCreateDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("create")]
@@ -56,7 +56,7 @@ namespace ep.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex.Message, ex);
+                _logger.LogError(ex.Message, ex);
                 throw new Exception();
             }
         }
@@ -64,7 +64,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPatch("update")]
-        public async Task<IActionResult> PatchCustomer([FromBody] CustomerCreateDto customerCreateDto)
+        public async Task<IActionResult> PatchCustomer([FromBody] ShopCreateDto customerCreateDto)
         {
             try
             {

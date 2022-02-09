@@ -3,10 +3,25 @@
     public class Shop
     {
         public int Id { get; set; }
+
+        [Required]
+        public string? ABN { get; set; }
         
-        public string? Name { get; set; }
-        
+        [Required]
+        public string? Address { get; set; }
+
         public DateTimeOffset CreatedOn { get; set; }
+
+        [Required]
+        public string? Owner { get; set; }
+        
+        [Required]
+        public string? Name { get; set; }
+
+        [Required]
+        public string? Telephone { get; set; }
+
+        public DateTimeOffset UpdatedOn { get; set; }
       
         public ICollection<Message>? Messages { get; set; }
 

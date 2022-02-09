@@ -14,14 +14,14 @@ using Xunit;
 
 namespace ep.Tests.Services
 {
-    public class CustomerServicesTests
+    public class CustomerServiceTests
     {
         private readonly CustomerService _service;
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IRepositoryWrapper> _repository;
         private readonly Customer _customer;
 
-        public CustomerServicesTests()
+        public CustomerServiceTests()
         {
             _mapper = new Mock<IMapper>();
             _repository = new Mock<IRepositoryWrapper>();

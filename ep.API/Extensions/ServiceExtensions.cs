@@ -22,6 +22,7 @@
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IShopService, ShopService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EP", Version = "v1" });
