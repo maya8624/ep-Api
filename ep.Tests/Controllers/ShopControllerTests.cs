@@ -38,13 +38,14 @@ namespace ep.Tests.Controllers
                 Name = "Charllet",
                 Telephone = "789 102"
             };
-            _service.Setup(x => x.PostShopAsync(shop));
+            _service.Setup(x => x.PostShopAsync(shop)).ReturnsAsync(1);
 
             // Act
             var result = await _controller.PostShopAsync(shop);
             
             // Assert
             _service.Verify(x => x.PostShopAsync(shop), Times.Once());
+            Assert.NotNull(result);
         }
     }
 }

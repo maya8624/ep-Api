@@ -23,12 +23,27 @@ namespace ep.Service.Services
             _repository = repository;
         }
 
-        public async Task PostShopAsync(ShopCreateDto createDto)
+        public async Task<int> PostShopAsync(ShopCreateDto createDto)
         {
             var shop = _mapper.Map<Shop>(createDto);
             shop.CreatedOn = DateTimeOffset.UtcNow;
             await _repository.Shop.CreateAsync(shop);
             await _repository.UnitOfWork.CompleteAsync();
+            return shop.Id;
+        }
+
+        public async Task<int> PutShopAsync(ShopEditDto editDto)
+        {
+            var existingShop = _repository.Shop.GetById(editDto.ShopId);
+            if (existingShop == null)
+            {
+                return 0;
+            }
+
+            var shop = _mapper.Map<Shop>(editDto);
+            shop.UpdatedOn = DateTimeOffset.UtcNow;
+            await _repository.UnitOfWork.CompleteAsync();
+            return shop.Id;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ep.Service.Interfaces
     public interface ICustomerService
     {
         Task<IEnumerable<Customer>> GetCustomers();
+        Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId);
         Task<Customer> GetCustomerById(int id);
         Task<Customer> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo);
         Task PostCustomerAsync(CustomerCreateDto createDto);

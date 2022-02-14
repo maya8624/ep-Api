@@ -39,6 +39,11 @@ namespace ep.Service.Services
             return await _repository.Customer.GetAllAsync();
         }
 
+        public async Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId)
+        {
+            return await _repository.Customer.GetTodaysRawCustomers(shopId);
+        }
+
         public Task PatchCustomerAsync(CustomerCreateDto createDto)
         {
             throw new NotImplementedException();
@@ -49,17 +54,17 @@ namespace ep.Service.Services
             var customer = _mapper.Map<Customer>(createDto);
             customer.CreatedOn = DateTimeOffset.UtcNow;
 
-            var message = new Message
-            {
-                CreatedOn = DateTimeOffset.UtcNow,
-                Icon = "create",
-                ShopId = customer.ShopId,
-                Status = MessageStatus.Created,
-                Text = $"Order: {createDto.OrderNo} has been received."
-            };
+            //var message = new Message
+            //{
+            //    CreatedOn = DateTimeOffset.UtcNow,
+            //    Icon = "create",
+            //    ShopId = customer.ShopId,
+            //    Status = MessageStatus.Created,
+            //    Text = $"Order: {createDto.OrderNo} has been received."
+            //};
 
             await _repository.Customer.CreateAsync(customer);
-            await _repository.Message.CreateAsync(message);
+            //await _repository.Message.CreateAsync(message);
             await _repository.UnitOfWork.CompleteAsync();
         }
     }

@@ -10,9 +10,22 @@
         }
 
         public async Task<bool> CheckAnyAsync(int shopId, string orderNo) 
-            => await _context.Customers.AnyAsync(m => m.ShopId == shopId && m.OrderNo == orderNo);
+            => await _context.Customers
+                    .AnyAsync(c => c.ShopId == shopId && c.OrderNo == orderNo);
 
         public async Task<Customer> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo)            
-            => await _context.Customers.FirstOrDefaultAsync(m => m.ShopId == shopId && m.OrderNo == orderNo);
+            => await _context.Customers
+                    .FirstOrDefaultAsync(c => c.ShopId == shopId && c.OrderNo == orderNo);
+
+        public async Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId)
+        {
+            var result = await _context.Customers
+                .Where(c => c.ShopId == shopId && 
+                            c.CreatedOn.Date == DateTimeOffset.UtcNow.Date &&
+                            c.MessageId == null)
+                .AsNoTracking()
+                .ToListAsync();
+            return result;
+        }
     }
 }

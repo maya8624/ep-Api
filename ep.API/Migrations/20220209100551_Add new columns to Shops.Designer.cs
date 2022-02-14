@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ep.Data.Persistant;
 
@@ -11,9 +12,10 @@ using ep.Data.Persistant;
 namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220209100551_Add new columns to Shops")]
+    partial class AddnewcolumnstoShops
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +34,6 @@ namespace ep.API.Migrations
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Mobile")
                         .IsRequired()
@@ -67,15 +66,13 @@ namespace ep.API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnOrder(5);
 
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ShopId")

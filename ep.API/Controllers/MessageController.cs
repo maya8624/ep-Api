@@ -1,6 +1,7 @@
 ﻿namespace ep.API.Controllers
 {   
     [ApiController]
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class MessageController : ControllerBase
     {

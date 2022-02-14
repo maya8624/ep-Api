@@ -10,8 +10,6 @@
         [Required]
         public string? Address { get; set; }
 
-        public DateTimeOffset CreatedOn { get; set; }
-
         [Required]
         public string? Owner { get; set; }
         
@@ -20,6 +18,8 @@
 
         [Required]
         public string? Telephone { get; set; }
+
+        public DateTimeOffset CreatedOn { get; set; }
 
         public DateTimeOffset UpdatedOn { get; set; }
       

@@ -4,6 +4,7 @@ namespace ep.Service.Interfaces
 {
     public interface IShopService
     {
-        Task PostShopAsync(ShopCreateDto shop);
+        Task<int> PostShopAsync(ShopCreateDto shop);
+        Task<int> PutShopAsync(ShopEditDto shop);
     }
 }

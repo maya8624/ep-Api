@@ -116,5 +116,43 @@ namespace ep.Tests.Services
             _repository.Verify(x => x.Message.CreateAsync(It.IsAny<Message>()), Times.Once);
             _repository.Verify(x => x.UnitOfWork.CompleteAsync());
         }
+
+        [Fact]
+        public async Task GetTodaysRawCustomers_WhenCalled_ReturnTodaysRawCustomers()
+        {
+            // Arrange
+            var customers = new List<Customer>
+            {
+                new Customer
+                {
+                    Id = 1,
+                    CreatedOn = DateTime.UtcNow,
+                    MessageId = null,
+                    Mobile = "0422230861",
+                    Name = "Andy",
+                    ShopId = 2,
+                    //OrderNo = "1-20220115"
+                },
+                new Customer
+                {
+                    Id = 2,
+                    CreatedOn = DateTime.UtcNow,
+                    MessageId = 23,
+                    Mobile = "0422230861",
+                    Name = "Jimmy",
+                    ShopId = 2,
+                }
+            };
+
+            _repository.Setup(x => x.Customer.GetTodaysRawCustomers(It.IsAny<int>())).ReturnsAsync(customers);
+
+            // Act
+            var result = await _service.GetTodaysRawCustomers(It.IsAny<int>());
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Contains("andy", result.FirstOrDefault(c => c.ShopId == 2 && c.MessageId == null).Name.ToLower());
+            Assert.Equal(1, result.Count(c => c.ShopId == 2 && c.MessageId != null));
+        }
     }
 }
