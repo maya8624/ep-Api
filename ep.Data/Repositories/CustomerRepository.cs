@@ -18,13 +18,14 @@
                     .FirstOrDefaultAsync(c => c.ShopId == shopId && c.OrderNo == orderNo);
 
         public async Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId)
-        {
-            return await _context.Customers
+        {            
+            var result = await _context.Customers
                 .Where(c => c.ShopId == shopId &&
-                            c.CreatedOn.ToString("yyyy-MM-dd") == DateTimeOffset.UtcNow.ToString("yyyy-MM-dd") &&
+                            c.CreatedOn.Date == DateTimeOffset.UtcNow.Date &&
                             c.MessageId == null)
                 .AsNoTracking()
                 .ToListAsync();
+            return result;
         }
     }
 }
