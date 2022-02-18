@@ -79,7 +79,7 @@ namespace ep.Tests.Controllers
             _service.Setup(x => x.GetCustomerByShopIdAndOrderNo(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(_customer);
 
             // Act
-            var result = await _controller.GetCustomerByShopIdAndOrderNo(It.IsAny<int>(), It.IsAny<string>());
+            var result = await _controller.GetCustomerByShopId(It.IsAny<int>(), It.IsAny<string>());
             var model = result.Value;
 
             // Assert

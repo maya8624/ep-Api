@@ -73,8 +73,9 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpGet("{shopId}&{orderNo}", Name = "customer-by-shopid-orderno")]
-        public async Task<ActionResult<Customer>> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo)
+        [Route("customer-by-shopid/{shopId}/{orderNo}")]
+        [HttpGet()]
+        public async Task<ActionResult<Customer>> GetCustomerByShopId(int shopId, string orderNo)
         {
             return await _service.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
         }

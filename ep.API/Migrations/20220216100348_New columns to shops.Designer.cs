@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ep.Data.Persistant;
 
@@ -11,9 +12,10 @@ using ep.Data.Persistant;
 namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220216100348_New columns to shops")]
+    partial class Newcolumnstoshops
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

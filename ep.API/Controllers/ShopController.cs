@@ -20,10 +20,11 @@ namespace ep.API.Controllers
             _service = service;
         }
 
-        [ProducesResponseType(typeof(ShopCreateDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ShopCreateDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("create")]
+        [Route("create")]
+        [HttpPost()]
         public async Task<ActionResult<int>> PostShopAsync([FromBody] ShopCreateDto shopCreateDto)
         {
             try
