@@ -11,6 +11,7 @@ namespace ep.Domain.Mappings
             CreateMap<ShopCreateDto, Shop>();
             //CreateMap<CustomerCreateDto, Message>()
             //    .ForMember(dest => dest.Recipient, opt => opt.MapFrom(src => src.Name));
+            CreateMap<MessageCreateDto, Message>();
         }
     }
 }

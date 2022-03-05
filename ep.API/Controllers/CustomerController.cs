@@ -111,7 +111,7 @@ namespace ep.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogWarning(ex.Message, ex);
-                throw new Exception();
+                throw;
             }
         }
     }

@@ -9,11 +9,9 @@ namespace ep.Domain.Enums
 {
     public enum MessageStatus
     {
-        Created,
         Prep,
         Sent,
         Resent,
         Completed,
-        Other
     }
 }

@@ -18,6 +18,7 @@
         public int ShopId { get; set; }
 
         public DateTimeOffset CreatedOn { get; set; }
+
         public ICollection<Message>? Messages { get; set; }
     }   
 }
