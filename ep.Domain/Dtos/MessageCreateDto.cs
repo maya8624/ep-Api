@@ -8,6 +8,7 @@ namespace ep.Domain.Dtos
 {
     public class MessageCreateDto
     {
+        public int CustomerId { get; set; }
         public string? Icon { get; set; }
         public string? OrderNo { get; set; }
         public int ShopId { get; set; }
