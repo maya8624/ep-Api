@@ -24,11 +24,13 @@
         {
             try
             {
+                if (createDto == null)
+                    return BadRequest();
                 var message = _mapper.Map<Message>(createDto);
                 message.CreatedOn = DateTimeOffset.UtcNow;
                 await _repository.Message.CreateAsync(message);
                 await _repository.UnitOfWork.CompleteAsync();
-                return Ok();
+                return Ok(message.Id);
             }
             catch (Exception ex)
             {
