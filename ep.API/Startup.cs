@@ -1,3 +1,5 @@
+using ep.Service.Email;
+
 namespace ep.API
 {
     public class Startup
@@ -12,6 +14,10 @@ namespace ep.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
             services.AddServices();
             services.AddDbContext<EPDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))

@@ -19,6 +19,7 @@
             services.AddAutoMapper(typeof(APIProfile));
             services.AddHttpClient();
             services.AddControllers();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IMessageService, MessageService>();
