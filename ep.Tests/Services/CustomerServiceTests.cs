@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using ep.API.Service.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using ep.API.Service;
 
 namespace ep.Tests.Services
 {
@@ -19,13 +22,15 @@ namespace ep.Tests.Services
         private readonly CustomerService _service;
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IRepositoryWrapper> _repository;
+        private readonly Mock<IHubContext<CustomerHub>> _hub;
         private readonly Customer _customer;
 
         public CustomerServiceTests()
         {
             _mapper = new Mock<IMapper>();
             _repository = new Mock<IRepositoryWrapper>();
-            _service = new CustomerService(_mapper.Object, _repository.Object);
+            _hub = new Mock<IHubContext<CustomerHub>>();
+            _service = new CustomerService(_hub.Object, _mapper.Object, _repository.Object);
 
             _customer = new Customer
             {

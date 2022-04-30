@@ -1,3 +1,4 @@
+using ep.API.Service.Hubs;
 using ep.Service.Email;
 
 namespace ep.API
@@ -22,6 +23,7 @@ namespace ep.API
             services.AddDbContext<EPDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
             );
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,12 +39,17 @@ namespace ep.API
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EP v1"));
 
             app.UseCors();
-
+                        
             app.UseHttpsRedirection();
 
             app.UseRouting();
             //app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<CustomerHub>("/messages");
+            });
 
             app.UseEndpoints(endpoints =>
             {

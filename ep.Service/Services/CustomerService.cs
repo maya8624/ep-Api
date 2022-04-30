@@ -1,24 +1,20 @@
-﻿using AutoMapper;
-using ep.Service.Interfaces;
+﻿using ep.Service.Interfaces;
 using ep.Data.Wrappers;
-using ep.Domain.Dtos;
-using ep.Domain.Enums;
-using ep.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
+using ep.API.Service.Hubs;
+using Newtonsoft.Json;
 
 namespace ep.Service.Services
 {
     public class CustomerService : ICustomerService
     {
+        private readonly IHubContext<CustomerHub> _hub;
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
-        public CustomerService(IMapper mapper, IRepositoryWrapper repository)
+        public CustomerService(IHubContext<CustomerHub> hub, IMapper mapper, IRepositoryWrapper repository)
         {
+            _hub = hub;
             _mapper = mapper;
             _repository = repository;
         }
@@ -53,7 +49,8 @@ namespace ep.Service.Services
         {
             var customer = _mapper.Map<Customer>(createDto);
             customer.CreatedOn = DateTimeOffset.UtcNow;
-
+            var json = JsonConvert.SerializeObject(customer);
+            await _hub.Clients.All.SendAsync("NewItem", json);
             //var message = new Message
             //{
             //    CreatedOn = DateTimeOffset.UtcNow,

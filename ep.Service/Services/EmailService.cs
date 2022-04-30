@@ -20,10 +20,10 @@ namespace ep.Service.Services
             Send(emailMessage);
         }
 
-        public Task SendEmailAsync(EmailMessage message)
+        public async Task SendEmailAsync(EmailMessage message)
         {
             var emailMessage = CreateEmailMessage(message);
-            SendAsync(emailMessage);
+            await SendAsync(emailMessage);
         }
 
         private void Send(MimeMessage mailMessage)
