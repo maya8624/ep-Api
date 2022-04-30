@@ -80,15 +80,15 @@ namespace ep.API.Controllers
             return await _service.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
         }
 
-        [ProducesResponseType(typeof(ShopCreateDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("create")]
-        public async Task<ActionResult> PostCustomer([FromBody] CustomerCreateDto customerCreateDto)
+        public async Task<ActionResult> CreateCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
             try
             {
-                await _service.PostCustomerAsync(customerCreateDto);
+                await _service.CreateCustomerAsync(customerCreateDto);
                 return Ok();
             }
             catch (Exception ex)
@@ -97,6 +97,7 @@ namespace ep.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -9,7 +9,7 @@ namespace ep.Service.Interfaces
         Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId);
         Task<Customer> GetCustomerById(int id);
         Task<Customer> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo);
-        Task PostCustomerAsync(CustomerCreateDto createDto);
+        Task CreateCustomerAsync(CustomerCreateDto createDto);
         Task PatchCustomerAsync(CustomerCreateDto createDto);
     }
 }

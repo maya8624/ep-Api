@@ -45,7 +45,7 @@ namespace ep.Service.Services
             throw new NotImplementedException();
         }
 
-        public async Task PostCustomerAsync(CustomerCreateDto createDto)
+        public async Task CreateCustomerAsync(CustomerCreateDto createDto)
         {
             var customer = _mapper.Map<Customer>(createDto);
             customer.CreatedOn = DateTimeOffset.UtcNow;
