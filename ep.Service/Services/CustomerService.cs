@@ -47,12 +47,19 @@ namespace ep.Service.Services
 
         public async Task CreateCustomerAsync(CustomerCreateDto createDto)
         {
-            var customer = _mapper.Map<Customer>(createDto);
-            customer.CreatedOn = DateTimeOffset.UtcNow;
-            var json = JsonConvert.SerializeObject(customer);
-            await _hub.Clients.All.SendAsync("NewCustomer", json);
-            await _repository.Customer.CreateAsync(customer);
-            await _repository.UnitOfWork.CompleteAsync();
+            try
+            {
+                var customer = _mapper.Map<Customer>(createDto);
+                customer.CreatedOn = DateTimeOffset.UtcNow;
+                var json = JsonConvert.SerializeObject(customer);
+                //await _hub.Clients.All.SendAsync("NewCustomer", json);
+                await _repository.Customer.CreateAsync(customer);
+                await _repository.UnitOfWork.CompleteAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
