@@ -50,18 +50,8 @@ namespace ep.Service.Services
             var customer = _mapper.Map<Customer>(createDto);
             customer.CreatedOn = DateTimeOffset.UtcNow;
             var json = JsonConvert.SerializeObject(customer);
-            await _hub.Clients.All.SendAsync("NewItem", json);
-            //var message = new Message
-            //{
-            //    CreatedOn = DateTimeOffset.UtcNow,
-            //    Icon = "create",
-            //    ShopId = customer.ShopId,
-            //    Status = MessageStatus.Created,
-            //    Text = $"Order: {createDto.OrderNo} has been received."
-            //};
-
+            await _hub.Clients.All.SendAsync("NewCustomer", json);
             await _repository.Customer.CreateAsync(customer);
-            //await _repository.Message.CreateAsync(message);
             await _repository.UnitOfWork.CompleteAsync();
         }
     }
