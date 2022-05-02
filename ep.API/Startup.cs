@@ -23,7 +23,7 @@ namespace ep.API
             services.AddDbContext<EPDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
             );
-            services.AddSignalR();
+            //services.AddSignalR();
                 //.AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
         }
 
@@ -58,7 +58,7 @@ namespace ep.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<CustomerHub>("/create");
+                //endpoints.MapHub<CustomerHub>("/create");
                 endpoints.MapControllers();
             });
         }
