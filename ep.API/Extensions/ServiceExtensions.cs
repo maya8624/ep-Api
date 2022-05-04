@@ -10,9 +10,10 @@
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:3000")
-                                        .AllowAnyOrigin()
+                                        //.AllowAnyOrigin()
                                         .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                                        .AllowAnyMethod()
+                                        .AllowCredentials();
                     });
             });
 

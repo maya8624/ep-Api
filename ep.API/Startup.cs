@@ -15,16 +15,16 @@ namespace ep.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("ClientPermission", policy =>
-                {
-                    policy.AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000")
-                        .AllowCredentials();
-                });
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("ClientPermission", policy =>
+            //    {
+            //        policy.AllowAnyHeader()
+            //            .AllowAnyMethod()
+            //            .WithOrigins("http://localhost:3000")
+            //            .AllowCredentials();
+            //    });
+            //});
 
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")
@@ -36,8 +36,8 @@ namespace ep.API
             );
            
 
-            //services.AddSignalR();
-                //.AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
+            services.AddSignalR();
+            //.AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,11 +52,11 @@ namespace ep.API
             
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EP v1"));
 
-            //app.UseCors();
+            app.UseCors();
                         
             app.UseHttpsRedirection();
 
-            app.UseCors("ClientPermission");
+            //app.UseCors("ClientPermission");
 
             app.UseRouting();
             //app.UseAuthentication();
@@ -73,7 +73,7 @@ namespace ep.API
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapHub<CustomerHub>("/hub/customer");
+                endpoints.MapHub<CustomerHub>("/hub/customer");
                 endpoints.MapControllers();
             });
         }
