@@ -36,7 +36,7 @@ namespace ep.API
             );
            
 
-            services.AddSignalR();
+            //services.AddSignalR();
                 //.AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
         }
 
@@ -47,10 +47,7 @@ namespace ep.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+           
             app.UseSwagger();
             
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EP v1"));
@@ -76,7 +73,7 @@ namespace ep.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<CustomerHub>("/hub/customer");
+                //endpoints.MapHub<CustomerHub>("/hub/customer");
                 endpoints.MapControllers();
             });
         }

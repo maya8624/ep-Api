@@ -53,8 +53,8 @@ namespace ep.Service.Services
                 customer.CreatedOn = DateTimeOffset.UtcNow;
                 var json = JsonConvert.SerializeObject(customer);
                 //await _hub.Clients.All.SendAsync("NewCustomer", json);
-                await _repository.Customer.CreateAsync(customer);
-                await _repository.UnitOfWork.CompleteAsync();
+                //await _repository.Customer.CreateAsync(customer);
+                //await _repository.UnitOfWork.CompleteAsync();
             }
             catch (Exception ex)
             {

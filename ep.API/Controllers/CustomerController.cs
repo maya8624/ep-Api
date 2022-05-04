@@ -1,4 +1,5 @@
-﻿using ep.Service.Interfaces;
+﻿using ep.API.Service.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Controllers
 {
@@ -105,8 +106,7 @@ namespace ep.API.Controllers
         public async Task<IActionResult> PatchCustomer([FromBody] ShopCreateDto customerCreateDto)
         {
             try
-            {
-                
+            {                
                 return Ok();
             }
             catch (Exception ex)
