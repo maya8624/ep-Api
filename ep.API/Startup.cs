@@ -15,6 +15,17 @@ namespace ep.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
+                });
+            });
+
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
@@ -23,7 +34,9 @@ namespace ep.API
             services.AddDbContext<EPDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
             );
-            //services.AddSignalR();
+           
+
+            services.AddSignalR();
                 //.AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
         }
 
@@ -34,14 +47,19 @@ namespace ep.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
             app.UseSwagger();
             
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EP v1"));
 
-            app.UseCors();
+            //app.UseCors();
                         
             app.UseHttpsRedirection();
+
+            app.UseCors("ClientPermission");
 
             app.UseRouting();
             //app.UseAuthentication();
@@ -58,7 +76,7 @@ namespace ep.API
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapHub<CustomerHub>("/create");
+                endpoints.MapHub<CustomerHub>("/hub/customer");
                 endpoints.MapControllers();
             });
         }
