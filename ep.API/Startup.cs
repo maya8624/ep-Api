@@ -14,18 +14,7 @@ namespace ep.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("ClientPermission", policy =>
-            //    {
-            //        policy.AllowAnyHeader()
-            //            .AllowAnyMethod()
-            //            .WithOrigins("http://localhost:3000")
-            //            .AllowCredentials();
-            //    });
-            //});
-
+        {          
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
