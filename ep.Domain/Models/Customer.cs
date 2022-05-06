@@ -2,14 +2,16 @@
 {
     public class Customer
     {
-        public int Id { get; set; }                
+        public int Id { get; set; }
 
+        //[Required]
+        //public string? Email { get; set; } = string.Empty;
         [Required]
         public string? Mobile { get; set; } = string.Empty;
 
         [Required]
         public string? Name { get; set; } = string.Empty;
-                
+
         public string? OrderNo { get; set; } = string.Empty;
 
         public int? MessageId { get; set; }
