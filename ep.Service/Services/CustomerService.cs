@@ -1,24 +1,30 @@
 ﻿using ep.Service.Interfaces;
 using ep.Data.Wrappers;
-using Microsoft.AspNetCore.SignalR;
+//using Microsoft.AspNetCore.SignalR;
 using ep.API.Service.Hubs;
 using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace ep.Service.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IHubContext<CustomerHub> _hub;
+        //private readonly IHubContext<CustomerHub> _hub;
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
-        public CustomerService(IHubContext<CustomerHub> hub, IMapper mapper, IRepositoryWrapper repository)
+        //public CustomerService(IHubContext<CustomerHub> hub, IMapper mapper, IRepositoryWrapper repository)
+        //{
+        //    _hub = hub;
+        //    _mapper = mapper;
+        //    _repository = repository;
+        //}
+
+        public CustomerService(IMapper mapper, IRepositoryWrapper repository)
         {
-            _hub = hub;
             _mapper = mapper;
             _repository = repository;
         }
-
         public async Task<Customer> GetCustomerById(int id)
         { 
             return await _repository.Customer.GetById(id);
@@ -52,7 +58,7 @@ namespace ep.Service.Services
                 var customer = _mapper.Map<Customer>(createDto);
                 customer.CreatedOn = DateTimeOffset.UtcNow;
                 var json = JsonConvert.SerializeObject(createDto);
-                await _hub.Clients.All.SendAsync("NewCustomer", createDto.Name);
+                //await _hub.Clients.All.SendAsync("NewCustomer", createDto.Name);
                 //await _repository.Customer.CreateAsync(customer);
                 //await _repository.UnitOfWork.CompleteAsync();
             }
