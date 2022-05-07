@@ -22,16 +22,16 @@ namespace ep.Tests.Services
         private readonly CustomerService _service;
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IRepositoryWrapper> _repository;
-        //private readonly Mock<IHubContext<CustomerHub>> _hub;
+        private readonly Mock<IHubContext<CustomerHub>> _hub;
         private readonly Customer _customer;
 
         public CustomerServiceTests()
         {
             _mapper = new Mock<IMapper>();
             _repository = new Mock<IRepositoryWrapper>();
-            //_hub = new Mock<IHubContext<CustomerHub>>();
-            _service = new CustomerService(_mapper.Object, _repository.Object);
-            //_service = new CustomerService(_hub.Object, _mapper.Object, _repository.Object);
+            _hub = new Mock<IHubContext<CustomerHub>>();
+            //_service = new CustomerService(_mapper.Object, _repository.Object);
+            _service = new CustomerService(_hub.Object, _mapper.Object, _repository.Object);
 
             _customer = new Customer
             {
