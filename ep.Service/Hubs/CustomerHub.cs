@@ -4,6 +4,6 @@ namespace ep.API.Service.Hubs
 {
     public class CustomerHub : Hub
     {
-        
+       
     }
 }
