@@ -2,6 +2,7 @@
 using ep.Data.Wrappers;
 using Microsoft.AspNetCore.SignalR;
 using ep.API.Service.Hubs;
+using Newtonsoft.Json;
 
 namespace ep.Service.Services
 {
@@ -50,7 +51,7 @@ namespace ep.Service.Services
             {
                 var customer = _mapper.Map<Customer>(createDto);
                 customer.CreatedOn = DateTimeOffset.UtcNow;
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(createDto);
+                var json = JsonConvert.SerializeObject(createDto);
                 await _hub.Clients.All.SendAsync("NewCustomer", createDto.Name);
                 //await _repository.Customer.CreateAsync(customer);
                 //await _repository.UnitOfWork.CompleteAsync();
