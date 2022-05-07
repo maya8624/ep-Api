@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿//using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Service.Hubs
 {
-    public class CustomerHub : Hub
+    public class CustomerHub // : Hub
     {
        
     }

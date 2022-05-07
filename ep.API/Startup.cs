@@ -52,7 +52,7 @@ namespace ep.API
                   
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<CustomerHub>("/hub/customer");
+                //endpoints.MapHub<CustomerHub>("/hub/customer");
                 endpoints.MapControllers();
             });
         }
