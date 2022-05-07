@@ -18,12 +18,7 @@ namespace ep.Service.Services
             _mapper = mapper;
             _repository = repository;
         }
-
-        //public CustomerService(IMapper mapper, IRepositoryWrapper repository)
-        //{
-        //    _mapper = mapper;
-        //    _repository = repository;
-        //}
+          
         public async Task<Customer> GetCustomerById(int id)
         { 
             return await _repository.Customer.GetById(id);
