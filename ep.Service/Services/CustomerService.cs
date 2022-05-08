@@ -51,8 +51,8 @@ namespace ep.Service.Services
             {
                 var customer = _mapper.Map<Customer>(createDto);
                 customer.CreatedOn = DateTimeOffset.UtcNow;
-                var json = JsonConvert.SerializeObject(createDto);
-                await _hub.Clients.All.SendAsync("NewCustomer", createDto.Name);
+                var json = JsonConvert.SerializeObject(customer);
+                await _hub.Clients.All.SendAsync("NewCustomer", json);
                 //await _repository.Customer.CreateAsync(customer);
                 //await _repository.UnitOfWork.CompleteAsync();
             }
@@ -60,6 +60,6 @@ namespace ep.Service.Services
             {
                 throw;
             }
-        }
+            }
     }
 }
