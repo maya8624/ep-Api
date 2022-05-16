@@ -10,6 +10,11 @@
         [Required]
         public string? Address { get; set; }
 
+        public string? Email { get; set; }
+
+        [Required]
+        public string Key { get; set; } = string.Empty;
+
         [Required]
         public string? Owner { get; set; }
         
@@ -19,9 +24,9 @@
         [Required]
         public string? Telephone { get; set; }
 
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
 
-        public DateTimeOffset UpdatedOn { get; set; }
+        public DateTimeOffset? UpdatedOn { get; set; }
       
         public ICollection<Message>? Messages { get; set; }
 

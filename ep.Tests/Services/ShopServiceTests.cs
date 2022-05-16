@@ -35,20 +35,20 @@ namespace ep.Tests.Services
             };
         }
 
-        [Fact]
-        public async Task PostShopAsync_WhenCalled_ShouldCreateNewShop()
-        {
-            // Arrange
-            _mapper.Setup(m => m.Map<Shop>(It.IsAny<ShopCreateDto>())).Returns(new Shop());
-            _repository.Setup(r => r.Shop.CreateAsync(It.IsAny<Shop>()));
-            _repository.Setup(r => r.UnitOfWork.CompleteAsync());
+        //[Fact]
+        //public async Task PostShopAsync_WhenCalled_ShouldCreateNewShop()
+        //{
+        //    // Arrange
+        //    _mapper.Setup(m => m.Map<Shop>(It.IsAny<ShopCreateDto>())).Returns(new Shop());
+        //    _repository.Setup(r => r.Shop.CreateAsync(It.IsAny<Shop>()));
+        //    _repository.Setup(r => r.UnitOfWork.CompleteAsync());
 
-            // Act
-            await _service.PostShopAsync(_createDto);
+        //    // Act
+        //    await _service.PostShopAsync(_createDto);
 
-            // Assert
-            _repository.Verify(r => r.Shop.CreateAsync(It.IsAny<Shop>()), Times.Once);
-            _repository.Verify(r => r.UnitOfWork.CompleteAsync(), Times.Once());
-        }
+        //    // Assert
+        //    _repository.Verify(r => r.Shop.CreateAsync(It.IsAny<Shop>()), Times.Once);
+        //    _repository.Verify(r => r.UnitOfWork.CompleteAsync(), Times.Once());
+        //}
     }
 }

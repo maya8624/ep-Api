@@ -3,6 +3,7 @@ using ep.Data.Wrappers;
 using Microsoft.AspNetCore.SignalR;
 using ep.API.Service.Hubs;
 using Newtonsoft.Json;
+using ep.Service.Cryptograph;
 
 namespace ep.Service.Services
 {
@@ -19,40 +20,22 @@ namespace ep.Service.Services
             _repository = repository;
         }
           
-        public async Task<Customer> GetCustomerById(int id)
-        { 
-            return await _repository.Customer.GetById(id);
-        }        
-        
-        public async Task<Customer> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo)
+        public async Task<IEnumerable<Customer>> GetTodaysCustomers(int shopId)
         {
-            // CHECK: check possibility of duplicate order numbers.
-            return await _repository.Customer.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
+            return await _repository.Customer.GetTodaysCustomers(shopId);
         }
 
-        public async Task<IEnumerable<Customer>> GetCustomers()
-        {
-            return await _repository.Customer.GetAllAsync();
-        }
-
-        public async Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId)
-        {
-            return await _repository.Customer.GetTodaysRawCustomers(shopId);
-        }
-
-        public Task PatchCustomerAsync(CustomerCreateDto createDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task CreateCustomerAsync(CustomerCreateDto createDto)
+        public async Task CreateCustomerAsync(CustomerCreateDto dto)
         {
             try
             {
-                var customer = _mapper.Map<Customer>(createDto);
-                customer.CreatedOn = DateTimeOffset.UtcNow;
+                var shop = await _repository.Shop.GetById(dto.Qi);
+                var orderNo = CryptoService.Decrypt(shop.Key, dto.Qv, dto.Qo);
+                var customer = _mapper.Map<Customer>(dto);
+                customer.OrderNo = orderNo;
                 var json = JsonConvert.SerializeObject(customer);
-                await _hub.Clients.All.SendAsync("NewCustomer", json);
+                
+                await _hub.Clients.All.SendAsync($"NewCustomerShop{shop.Id}", json);
                 //await _repository.Customer.CreateAsync(customer);
                 //await _repository.UnitOfWork.CompleteAsync();
             }
@@ -60,6 +43,6 @@ namespace ep.Service.Services
             {
                 throw;
             }
-            }
+        }
     }
 }

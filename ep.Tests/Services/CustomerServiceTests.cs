@@ -65,37 +65,37 @@ namespace ep.Tests.Services
             };
         }
 
-        [Fact]
-        public async Task GetCustomerById_WhenCallWithIdedReturnCustomer()
-        {
-            // Arrange
-            _repository.Setup(x => x.Customer.GetById(It.IsAny<int>()))
-                       .ReturnsAsync(_customer);
+        //[Fact]
+        //public async Task GetCustomerById_WhenCallWithIdedReturnCustomer()
+        //{
+        //    // Arrange
+        //    _repository.Setup(x => x.Customer.GetById(It.IsAny<int>()))
+        //               .ReturnsAsync(_customer);
 
-            // Act
-            var result = await _service.GetCustomerById(2);
+        //    // Act
+        //    var result = await _service.GetCustomerById(2);
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Contains("joseph", result.Name?.ToLower());
-            Assert.Equal(2, result.Messages?.Count);
-        }
+        //    // Assert
+        //    Assert.NotNull(result);
+        //    Assert.Contains("joseph", result.Name?.ToLower());
+        //    Assert.Equal(2, result.Messages?.Count);
+        //}
 
-        [Fact]
-        public async Task GetCustomerByShopIdAndOrderNo_WhenCalledWithShopIdAndCustomerIdShouldReturnRightCustomer()
-        {
-            // Arrange
-            _repository.Setup(x => x.Customer.GetCustomerByShopIdAndOrderNo(It.IsAny<int>(), It.IsAny<string>()))
-                       .ReturnsAsync(_customer);
+        //[Fact]
+        //public async Task GetCustomerByShopIdAndOrderNo_WhenCalledWithShopIdAndCustomerIdShouldReturnRightCustomer()
+        //{
+        //    // Arrange
+        //    _repository.Setup(x => x.Customer.GetCustomerByShopIdAndOrderNo(It.IsAny<int>(), It.IsAny<string>()))
+        //               .ReturnsAsync(_customer);
 
-            // Act
-            var result = await _service.GetCustomerByShopIdAndOrderNo(0, "1");
+        //    // Act
+        //    var result = await _service.GetCustomerByShopIdAndOrderNo(0, "1");
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Contains("joseph", result.Name?.ToLower());
-            Assert.Equal(2, result.Messages?.Count);
-        }
+        //    // Assert
+        //    Assert.NotNull(result);
+        //    Assert.Contains("joseph", result.Name?.ToLower());
+        //    Assert.Equal(2, result.Messages?.Count);
+        //}
 
         //[Fact]
         //public async Task CreateCustomerAsync_WhenCalled_CreateNewCustomer()
@@ -150,15 +150,15 @@ namespace ep.Tests.Services
                 }
             };
 
-            _repository.Setup(x => x.Customer.GetTodaysRawCustomers(It.IsAny<int>())).ReturnsAsync(customers);
+            //_repository.Setup(x => x.Customer.GetTodaysRawCustomers(It.IsAny<int>())).ReturnsAsync(customers);
 
             // Act
-            var result = await _service.GetTodaysRawCustomers(It.IsAny<int>());
+            //var result = await _service.GetTodaysRawCustomers(It.IsAny<int>());
 
             // Assert
-            Assert.NotNull(result);
-            Assert.Contains("andy", result.FirstOrDefault(c => c.ShopId == 2 && c.MessageId == null).Name.ToLower());
-            Assert.Equal(1, result.Count(c => c.ShopId == 2 && c.MessageId != null));
+            //Assert.NotNull(result);
+            //Assert.Contains("andy", result.FirstOrDefault(c => c.ShopId == 2 && c.MessageId == null).Name.ToLower());
+            //Assert.Equal(1, result.Count(c => c.ShopId == 2 && c.MessageId != null));
         }
     }
 }

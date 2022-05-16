@@ -18,40 +18,11 @@ namespace ep.API.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesDefaultResponseType]
-        [HttpGet("{id}", Name = "customer")]
-        public async Task<ActionResult<Customer>> GetCustomerById(int id)
-        {
-            try
-            {
-                return await _service.GetCustomerById(id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message, ex);
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpGet("customers")]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
-        {
-            var result = await _service.GetCustomers();
-            result.Count();
-            return Ok(result);
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("raw-customers/{shopId:int}/")]
+        [Route("GetTodaysCustomers/{shopId:int}/")]
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetTodaysRawCustomers(int shopId)
+        public async Task<ActionResult<IEnumerable<Customer>>> GetTodaysCustomers(int shopId)
         {
             try
             {
@@ -60,7 +31,7 @@ namespace ep.API.Controllers
                     return BadRequest();
                 }
 
-                var result = await _service.GetTodaysRawCustomers(shopId);                
+                var result = await _service.GetTodaysCustomers(shopId);                
                 return Ok(result);
 
             }
@@ -69,16 +40,6 @@ namespace ep.API.Controllers
                 _logger.LogError(ex.Message, ex);
                 return StatusCode(500, ex.Message);
             }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("customer-by-shopid/{shopId}/{orderNo}")]
-        [HttpGet()]
-        public async Task<ActionResult<Customer>> GetCustomerByShopId(int shopId, string orderNo)
-        {
-            return await _service.GetCustomerByShopIdAndOrderNo(shopId, orderNo);
         }
 
         [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status201Created)]
@@ -96,23 +57,6 @@ namespace ep.API.Controllers
             {
                 _logger.LogError(ex.Message, ex);
                 return StatusCode(500, ex.Message);
-            }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPatch("update")]
-        public async Task<IActionResult> PatchCustomer([FromBody] ShopCreateDto customerCreateDto)
-        {
-            try
-            {                
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex.Message, ex);
-                throw;
             }
         }
     }

@@ -7,7 +7,8 @@ namespace ep.Domain.Mappings
         public APIProfile()
         {
             // Source => Target
-            CreateMap<CustomerCreateDto, Customer>();
+            CreateMap<CustomerCreateDto, Customer>()
+                .ForMember(dest => dest.ShopId, opt => opt.MapFrom(src => src.Qi));
             CreateMap<ShopCreateDto, Shop>();
             //CreateMap<CustomerCreateDto, Message>()
             //    .ForMember(dest => dest.Recipient, opt => opt.MapFrom(src => src.Name));

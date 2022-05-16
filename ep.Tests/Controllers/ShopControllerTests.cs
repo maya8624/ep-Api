@@ -26,26 +26,26 @@ namespace ep.Tests.Controllers
             _controller = new ShopController(_logger.Object, _service.Object);
         }
 
-        [Fact]
-        public async Task PostShopAsync_WhenCalled_ShouldSaveShop()
-        {
-            // Arrange
-            var shop = new ShopCreateDto
-            {
-                ABN = "123 456",
-                Address = "Sydney",
-                Owner = "Owner",
-                Name = "Charllet",
-                Telephone = "789 102"
-            };
-            _service.Setup(x => x.PostShopAsync(shop)).ReturnsAsync(1);
+        //[Fact]
+        //public async Task PostShopAsync_WhenCalled_ShouldSaveShop()
+        //{
+        //    // Arrange
+        //    var shop = new ShopCreateDto
+        //    {
+        //        ABN = "123 456",
+        //        Address = "Sydney",
+        //        Owner = "Owner",
+        //        Name = "Charllet",
+        //        Telephone = "789 102"
+        //    };
+        //    _service.Setup(x => x.PostShopAsync(shop)).ReturnsAsync(1);
 
-            // Act
-            var result = await _controller.PostShopAsync(shop);
+        //    // Act
+        //    var result = await _controller.PostShopAsync(shop);
             
-            // Assert
-            _service.Verify(x => x.PostShopAsync(shop), Times.Once());
-            Assert.NotNull(result);
-        }
+        //    // Assert
+        //    _service.Verify(x => x.PostShopAsync(shop), Times.Once());
+        //    Assert.NotNull(result);
+        //}
     }
 }

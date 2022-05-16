@@ -2,15 +2,20 @@
 {
     public class CustomerCreateDto
     {           
+
         [Required]
         public string? Mobile { get; set; }
 
         [Required]
         public string? Name { get; set; }
-                
-        public string? OrderNo { get; set; }
 
         [Required]
-        public int? ShopId { get; set; }
+        public int Qi { get; set; }
+
+        [Required]
+        public string Qo { get; set; } = string.Empty;
+
+        [Required]
+        public string Qv{ get; set; } = string.Empty;
     }
 }

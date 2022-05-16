@@ -6,7 +6,6 @@ namespace ep.Data.Interfaces
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {
         Task<bool> CheckAnyAsync(int shopId, string orderNo);
-        Task<Customer> GetCustomerByShopIdAndOrderNo(int shopId, string orderNo);
-        Task<IEnumerable<Customer>> GetTodaysRawCustomers(int shopId);
+        Task<IEnumerable<Customer>> GetTodaysCustomers(int shopId);
     }
 }

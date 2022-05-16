@@ -25,12 +25,12 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("create")]
         [HttpPost()]
-        public async Task<ActionResult<int>> PostShopAsync([FromBody] ShopCreateDto shopCreateDto)
+        public async Task<IActionResult> CreateShopAsync([FromBody] ShopCreateDto dto)
         {
             try
             {
-                var shopId = await _service.PostShopAsync(shopCreateDto);
-                return Ok(shopId);
+                var resposne = await _service.CreateShopAsync(dto);
+                return Ok(resposne);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("update")]
-        public async Task<ActionResult<int>> PutShopAsync([FromBody] ShopEditDto editDto)
+        public async Task<IActionResult> PutShopAsync([FromBody] ShopEditDto editDto)
         {
             try
             {

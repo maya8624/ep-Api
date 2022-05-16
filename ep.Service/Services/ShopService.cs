@@ -1,14 +1,7 @@
-﻿using AutoMapper;
-using ep.Data.Interfaces;
-using ep.Data.Wrappers;
-using ep.Domain.Dtos;
-using ep.Domain.Models;
+﻿using ep.Data.Wrappers;
+using ep.Domain.ResponseModels;
+using ep.Service.Cryptograph;
 using ep.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ep.Service.Services
 {
@@ -23,13 +16,23 @@ namespace ep.Service.Services
             _repository = repository;
         }
 
-        public async Task<int> PostShopAsync(ShopCreateDto createDto)
+        public async Task<ShopResponse> CreateShopAsync(ShopCreateDto dto)
         {
-            var shop = _mapper.Map<Shop>(createDto);
-            shop.CreatedOn = DateTimeOffset.UtcNow;
-            await _repository.Shop.CreateAsync(shop);
-            await _repository.UnitOfWork.CompleteAsync();
-            return shop.Id;
+            try
+            {
+                var shop = _mapper.Map<Shop>(dto);
+                var crypto = new CryptoService();
+                shop.Key = crypto.GetKey();
+                await _repository.Shop.CreateAsync(shop);
+                await _repository.UnitOfWork.CompleteAsync();
+                var respones = new ShopResponse(shop.Key, shop.Id);
+                return respones;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(nameof(CreateShopAsync), ex);
+                throw;
+            }
         }
 
         public async Task<int> PutShopAsync(ShopEditDto editDto)
