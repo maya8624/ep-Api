@@ -15,6 +15,9 @@ namespace ep.Domain.Dtos
         public string? Address { get; set; }
 
         [Required]
+        public string? Email { get; set; }
+
+        [Required]
         public string? Owner { get; set; }
 
         [Required]

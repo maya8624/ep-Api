@@ -10,10 +10,10 @@
         [Required]
         public string? Address { get; set; }
 
-        public string? Email { get; set; }
-
         [Required]
-        public string Key { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+
+        public string? Key { get; set; }
 
         [Required]
         public string? Owner { get; set; }
