@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ep.Data.Persistant;
 
@@ -11,16 +12,17 @@ using ep.Data.Persistant;
 namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221126000337_Create Business Table")]
+    partial class CreateBusinessTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("ep.Domain.Models.Business", b =>
                 {
@@ -28,7 +30,7 @@ namespace ep.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ABN")
                         .HasColumnType("nvarchar(max)");
@@ -63,7 +65,7 @@ namespace ep.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Business", (string)null);
+                    b.ToTable("Business");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.Customer", b =>
@@ -72,7 +74,7 @@ namespace ep.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
@@ -99,7 +101,7 @@ namespace ep.API.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.Message", b =>
@@ -108,7 +110,7 @@ namespace ep.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
@@ -137,7 +139,7 @@ namespace ep.API.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.Shop", b =>
@@ -146,7 +148,7 @@ namespace ep.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ABN")
                         .IsRequired()
@@ -183,7 +185,7 @@ namespace ep.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shops", (string)null);
+                    b.ToTable("Shops");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.Customer", b =>
