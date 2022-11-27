@@ -46,8 +46,8 @@ namespace ep.API.Controllers
         [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("create")]
-        public async Task<ActionResult> CreateCustomer([FromBody] CustomerCreateDto customerCreateDto)
+        [HttpPost("SaveCustomer")]
+        public async Task<ActionResult> SaveCustomer([FromBody] CustomerCreateDto customerCreateDto)
         {
             try
             {
