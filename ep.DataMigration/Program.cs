@@ -1,6 +1,5 @@
-﻿using ep.Data.Interfaces;
-using ep.Data.Persistant;
-using ep.Data.Repositories;
+﻿using ep.Data.Persistant;
+using ep.Data.Wrappers;
 using ep.DataMigration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,17 +26,18 @@ using IHost host = Host.CreateDefaultBuilder(args)
     {
         var cns = context.Configuration.GetConnectionString("EPDBConnection");
         services.AddDbContext<EPDbContext>(options => options.UseSqlServer(cns));
-        services.AddScoped<IBusinessRepository, BusinessRepository>();
+        services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<Migration>();
     })
     .Build();
 
-RunService(host.Services);
+await RunService(host.Services);
 await host.RunAsync();
 
-static void RunService(IServiceProvider services)
+static async Task RunService(IServiceProvider services)
 {
     using IServiceScope serviceScope = services.CreateScope();
     IServiceProvider provider = serviceScope.ServiceProvider;
-    provider.GetRequiredService<Migration>().Run();
+    await provider.GetRequiredService<Migration>().Run();
 }

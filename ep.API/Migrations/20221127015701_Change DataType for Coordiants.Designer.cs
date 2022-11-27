@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ep.Data.Persistant;
 
@@ -11,9 +12,11 @@ using ep.Data.Persistant;
 namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221127015701_Change DataType for Coordiants")]
+    partial class ChangeDataTypeforCoordiants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,11 +45,13 @@ namespace ep.API.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Latitude")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Latitude")
+                        .HasPrecision(8, 6)
+                        .HasColumnType("decimal(8,6)");
 
-                    b.Property<string>("Longitude")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Longitude")
+                        .HasPrecision(9, 6)
+                        .HasColumnType("decimal(9,6)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

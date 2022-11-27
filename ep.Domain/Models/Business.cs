@@ -8,13 +8,11 @@ namespace ep.Domain.Models
         public string? ABN { get; set; }
         public string? Address { get; set; }
         public string? Owner { get; set; }
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; }
         public string? Name { get; set; }
         public string? Phone { get; set; }
-        [Precision(14, 2)]
-        public decimal Latitude { get; set; }
-        [Precision(14, 2)]
-        public decimal Longitude { get; set; }
+        public string? Latitude { get; set; }
+        public string? Longitude { get; set; }
         public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
         public DateTimeOffset? UpdatedOn { get; set; }
     }

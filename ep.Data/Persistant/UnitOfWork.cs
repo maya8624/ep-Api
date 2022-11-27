@@ -9,9 +9,10 @@
             _context = context;
         }
 
-        public async Task CompleteAsync()
+        public async Task<int> CompleteAsync()
         {
-            await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
+            return result;
         }
     }
 }

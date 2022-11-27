@@ -24,5 +24,4 @@
     <ProjectReference Include="..\ep.Domain\ep.Domain.csproj" />
     <ProjectReference Include="..\ep.Service\ep.Service.csproj" />
   </ItemGroup>
-
 </Project>

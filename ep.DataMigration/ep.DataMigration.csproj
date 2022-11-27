@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -21,4 +21,9 @@
     <ProjectReference Include="..\ep.Data\ep.Data.csproj" />
   </ItemGroup>
 
+<ItemGroup>
+	<None Update="appsettings.json">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+</ItemGroup>
 </Project>
