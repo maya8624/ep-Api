@@ -1,4 +1,6 @@
-﻿namespace ep.Domain.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ep.Contract.Dtos
 {
     public class CustomerCreateDto
     {           

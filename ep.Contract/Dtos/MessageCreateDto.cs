@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ep.Domain.Enums;
 
-namespace ep.Domain.Dtos
+namespace ep.Contract.Dtos
 {
     public class MessageCreateDto
     {

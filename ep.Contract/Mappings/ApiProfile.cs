@@ -1,6 +1,9 @@
-﻿using ep.Domain.Dtos;
+﻿using AutoMapper;
+using ep.Contract.Dtos;
+using ep.Contract.ViewModels;
+using ep.Domain.Models;
 
-namespace ep.Domain.Mappings
+namespace ep.Contract.Mappings
 {
     public class APIProfile : Profile
     {
@@ -9,10 +12,12 @@ namespace ep.Domain.Mappings
             // Source => Target
             CreateMap<CustomerCreateDto, Customer>()
                 .ForMember(dest => dest.ShopId, opt => opt.MapFrom(src => src.Qi));
+
             CreateMap<ShopCreateDto, Shop>();
-            //CreateMap<CustomerCreateDto, Message>()
-            //    .ForMember(dest => dest.Recipient, opt => opt.MapFrom(src => src.Name));
+            
             CreateMap<MessageCreateDto, Message>();
+
+            CreateMap<Business, BusinessView>();
         }
     }
 }

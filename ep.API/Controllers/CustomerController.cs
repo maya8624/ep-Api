@@ -1,4 +1,5 @@
 ﻿using ep.API.Service.Hubs;
+using ep.Contract.Dtos;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Controllers

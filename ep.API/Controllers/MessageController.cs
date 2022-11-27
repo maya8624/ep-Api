@@ -1,4 +1,5 @@
-﻿using ep.Service.Email;
+﻿using ep.Contract.Dtos;
+using ep.Service.Email;
 
 namespace ep.API.Controllers
 {   

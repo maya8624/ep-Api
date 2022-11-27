@@ -3,7 +3,7 @@ using ep.Service.Interfaces;
 using ep.Data.Interfaces;
 using ep.Data.Persistant;
 using ep.Data.Wrappers;
-using ep.Domain.Dtos;
+using ep.Contract.Dtos;
 using ep.Domain.Enums;
 using ep.Domain.Models;
 using Microsoft.Extensions.Logging;

@@ -1,6 +1,6 @@
 ﻿using ep.API.Controllers;
 using ep.Data.Interfaces;
-using ep.Domain.Dtos;
+using ep.Contract.Dtos;
 using ep.Service.Interfaces;
 using Microsoft.Extensions.Logging;
 using Moq;

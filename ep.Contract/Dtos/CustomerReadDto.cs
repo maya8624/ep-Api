@@ -1,4 +1,6 @@
-﻿namespace ep.Domain.Dtos
+﻿using ep.Domain.Models;
+
+namespace ep.Contract.Dtos
 {
     public class CustomerReadDto
     { 

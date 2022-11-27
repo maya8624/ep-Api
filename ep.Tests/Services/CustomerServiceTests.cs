@@ -1,19 +1,15 @@
 ﻿using AutoMapper;
 using ep.Service.Services;
 using ep.Data.Wrappers;
-using ep.Domain.Dtos;
 using ep.Domain.Enums;
 using ep.Domain.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using ep.API.Service.Hubs;
 using Microsoft.AspNetCore.SignalR;
-using ep.API.Service;
 
 namespace ep.Tests.Services
 {

@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
 using ep.Data.Wrappers;
-using ep.Domain.Dtos;
-using ep.Domain.Models;
+using ep.Contract.Dtos;
 using ep.Service.Services;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace ep.Tests.Services
 {

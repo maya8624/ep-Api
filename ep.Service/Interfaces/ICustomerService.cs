@@ -1,5 +1,4 @@
-﻿using ep.Domain.Dtos;
-using ep.Domain.Models;
+﻿using ep.Contract.Dtos;
 
 namespace ep.Service.Interfaces
 {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using ep.API.Service.Hubs;
 using Newtonsoft.Json;
 using ep.Service.Cryptograph;
+using ep.Contract.Dtos;
 
 namespace ep.Service.Services
 {

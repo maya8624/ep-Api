@@ -1,4 +1,5 @@
-﻿using ep.Data.Wrappers;
+﻿using ep.Contract.Dtos;
+using ep.Data.Wrappers;
 using ep.Domain.ResponseModels;
 using ep.Service.Cryptograph;
 using ep.Service.Interfaces;

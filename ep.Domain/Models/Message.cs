@@ -1,4 +1,6 @@
-﻿namespace ep.Domain.Models
+﻿using ep.Domain.Enums;
+
+namespace ep.Domain.Models
 {
     public class Message
     {

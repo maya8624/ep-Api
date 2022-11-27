@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ep.Domain.Dtos
+namespace ep.Contract.Dtos
 {
     public class ShopCreateDto
     {
