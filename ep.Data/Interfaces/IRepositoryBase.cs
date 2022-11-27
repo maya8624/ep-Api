@@ -8,7 +8,7 @@ namespace ep.Data.Interfaces
 
         Task<T> GetById(int id);
 
-        IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> GetByCondition(Expression<Func<T, bool>> expression);
 
         Task CreateAsync(T entity);
 

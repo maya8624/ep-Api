@@ -3,6 +3,7 @@
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private readonly EPDbContext _context;
+        private IBusinessRepository? _business;
         private ICustomerRepository? _customer;
         private IMessageRepository? _message;
         private IShopRepository? _shop;
@@ -10,7 +11,10 @@
 
         public RepositoryWrapper(EPDbContext context) => _context = context;
 
-        public ICustomerRepository Customer 
+        public IBusinessRepository Business
+            => _business is null ? _business = new BusinessRepository(_context) : _business;
+
+        public ICustomerRepository Customer
             => _customer is null ? _customer = new CustomerRepository(_context) : _customer;
 
         public IMessageRepository Message 

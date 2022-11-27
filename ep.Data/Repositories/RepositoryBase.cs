@@ -10,33 +10,21 @@
         }
 
         public async Task CreateAsync(T entity)
-        {
-            await _context.Set<T>().AddAsync(entity);
-        }
+            => await _context.Set<T>().AddAsync(entity);
 
         public void Delete(T entity)
-        {
-            _context.Set<T>().Remove(entity);
-        }
+            => _context.Set<T>().Remove(entity);
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _context.Set<T>().AsNoTracking().ToListAsync();
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() 
+            => await _context.Set<T>().ToListAsync();
 
-        public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
-        {
-            return _context.Set<T>().Where(expression).AsNoTracking();
-        }
+        public async Task<IEnumerable<T>> GetByCondition(Expression<Func<T, bool>> expression)
+        => await _context.Set<T>().Where(expression).ToListAsync();
 
-        public async Task<T> GetById(int id)
-        {
-            return await _context.Set<T>().FindAsync(id);
-        }
+        public async Task<T> GetById(int id) 
+            => await _context.Set<T>().FindAsync(id);
 
-        public void Update(T entity)
-        {
-            _context.Set<T>().Update(entity);
-        }
+        public void Update(T entity) 
+            => _context.Set<T>().Update(entity);
     }
 }

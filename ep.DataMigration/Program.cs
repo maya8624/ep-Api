@@ -1,4 +1,6 @@
-﻿using ep.Data.Persistant;
+﻿using ep.Data.Interfaces;
+using ep.Data.Persistant;
+using ep.Data.Repositories;
 using ep.DataMigration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +27,8 @@ using IHost host = Host.CreateDefaultBuilder(args)
     {
         var cns = context.Configuration.GetConnectionString("EPDBConnection");
         services.AddDbContext<EPDbContext>(options => options.UseSqlServer(cns));
-        //services.AddSingleton<ITrustApiRepository, TrustApiRepository>();
-        services.AddSingleton<Migration>();
+        services.AddScoped<IBusinessRepository, BusinessRepository>();
+        services.AddScoped<Migration>();
     })
     .Build();
 
