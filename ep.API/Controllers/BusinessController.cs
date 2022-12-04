@@ -22,7 +22,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("GetBusinessesAsync")]
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Business>>> GetBusinessesAsync()
+        public async Task<ActionResult<IEnumerable<BusinessView>>> GetBusinessesAsync()
         {
             try
             {
