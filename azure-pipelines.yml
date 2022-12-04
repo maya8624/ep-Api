@@ -30,6 +30,9 @@ steps:
 
 - task: VSTest@2
   inputs:
+    testSelector: 'testAssemblies'
+    # testAssemblyVer2: '**\myTestAssembly.dll'
+    vsTestVersion: latest
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
