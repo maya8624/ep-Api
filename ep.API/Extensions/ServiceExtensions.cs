@@ -1,4 +1,6 @@
 ﻿using ep.Contract.Mappings;
+using ep.Contract.RequestModels;
+using FluentValidation;
 
 namespace ep.API.Extensions
 {
@@ -27,6 +29,7 @@ namespace ep.API.Extensions
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<IValidator<BusinessRequest>, BusinessValidator>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EP", Version = "v1" });

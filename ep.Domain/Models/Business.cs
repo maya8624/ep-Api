@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace ep.Domain.Models
+﻿namespace ep.Domain.Models
 {
     public class Business
     {

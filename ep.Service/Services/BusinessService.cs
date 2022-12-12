@@ -1,4 +1,5 @@
-﻿using ep.Contract.ViewModels;
+﻿using ep.Contract.RequestModels;
+using ep.Contract.ViewModels;
 using ep.Data.Wrappers;
 using ep.Service.Interfaces;
 
@@ -20,6 +21,13 @@ namespace ep.Service.Services
             var businesses = await _repository.Business.GetAllAsync();
             var data = _mapper.Map<IEnumerable<Business>, IEnumerable<BusinessView>>(businesses);
             return data;
+        }
+
+        public async Task SaveBusinessAsync(BusinessRequest request)
+        {
+            var business = _mapper.Map<Business>(request);
+            await _repository.Business.CreateAsync(business);
+            await _repository.UnitOfWork.CompleteAsync();
         }
     }
 }

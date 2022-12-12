@@ -1,4 +1,6 @@
-﻿using ep.Contract.ViewModels;
+﻿using ep.Contract.RequestModels;
+using ep.Contract.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ep.API.Controllers
 {
@@ -17,12 +19,12 @@ namespace ep.API.Controllers
             _service = service;
         }
 
-        [ProducesResponseType(typeof(BusinessView), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(IEnumerable<BusinessView>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("GetBusinessesAsync")]
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<BusinessView>>> GetBusinessesAsync()
+        public async Task<IActionResult> GetBusinessesAsync()
         {
             try
             {
@@ -32,6 +34,25 @@ namespace ep.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Error {nameof(GetBusinessesAsync)}, message| {ex.Message}", ex);
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("SaveBusiness")]
+        [HttpPost()]
+        public async Task<IActionResult> SaveBusiness(BusinessRequest request)
+        {
+            try
+            {
+                await _service.SaveBusinessAsync(request);
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error {nameof(SaveBusiness)}, message| {ex.Message}", ex);
                 return StatusCode(500, ex.Message);
             }
         }

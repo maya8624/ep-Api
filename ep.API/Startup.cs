@@ -1,5 +1,6 @@
 using ep.API.Service.Hubs;
 using ep.Service.Email;
+using FluentValidation.AspNetCore;
 
 namespace ep.API
 {
@@ -24,6 +25,7 @@ namespace ep.API
                 options.UseSqlServer(Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
             );
 
+            services.AddFluentValidationAutoValidation();
             services.AddSignalR()
             .AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
         }

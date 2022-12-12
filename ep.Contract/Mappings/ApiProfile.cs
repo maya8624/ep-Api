@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ep.Contract.Dtos;
+using ep.Contract.RequestModels;
 using ep.Contract.ViewModels;
 using ep.Domain.Models;
 
@@ -13,11 +14,10 @@ namespace ep.Contract.Mappings
             CreateMap<CustomerCreateDto, Customer>()
                 .ForMember(dest => dest.ShopId, opt => opt.MapFrom(src => src.Qi));
 
-            CreateMap<ShopCreateDto, Shop>();
-            
+            CreateMap<ShopCreateDto, Shop>();            
             CreateMap<MessageCreateDto, Message>();
-
             CreateMap<Business, BusinessView>();
+            CreateMap<BusinessRequest, Business>();
         }
     }
 }
