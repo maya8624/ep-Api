@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using ep.Contract.RequestModels;
 using ep.Data.Wrappers;
+using ep.Domain.Models;
 using ep.Service.Services;
 using Moq;
-using ep.Contract.RequestModels;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace ep.Tests.Services
 {
@@ -23,28 +26,28 @@ namespace ep.Tests.Services
                 ABN = "123 456",
                 Address = "Sydney",
                 Owner = "Owner",
+                Email = "andy@domain.com",
                 Name = "Charllet",
                 Phone = "789 102",
-                Email = "andy@domain.com",
-                Latitude = "",
-                Longitude = ""
+                Latitude = 52.26m,
+                Longitude = 21.95m
             };
         }
 
-        //[Fact]
-        //public async Task PostShopAsync_WhenCalled_ShouldCreateNewShop()
-        //{
-        //    // Arrange
-        //    _mapper.Setup(m => m.Map<Shop>(It.IsAny<ShopCreateDto>())).Returns(new Shop());
-        //    _repository.Setup(r => r.Shop.CreateAsync(It.IsAny<Shop>()));
-        //    _repository.Setup(r => r.UnitOfWork.CompleteAsync());
+        [Fact]
+        public async Task SaveBusinessAsync_WhenCalled_ShouldCreateNewShop()
+        {
+            // Arrange
+            _mapper.Setup(x => x.Map<Business>(It.IsAny<BusinessRequest>())).Returns(new Business());
+            _repository.Setup(x => x.Business.CreateAsync(It.IsAny<Business>()));
+            _repository.Setup(x => x.UnitOfWork.CompleteAsync());
 
-        //    // Act
-        //    await _service.PostShopAsync(_createDto);
+            // Act
+            await _service.SaveBusinessAsync(_business);
 
-        //    // Assert
-        //    _repository.Verify(r => r.Shop.CreateAsync(It.IsAny<Shop>()), Times.Once);
-        //    _repository.Verify(r => r.UnitOfWork.CompleteAsync(), Times.Once());
-        //}
+            // Assert
+            _repository.Verify(x => x.Business.CreateAsync(It.IsAny<Business>()), Times.Once);
+            _repository.Verify(x => x.UnitOfWork.CompleteAsync(), Times.Once());
+        }
     }
 }
