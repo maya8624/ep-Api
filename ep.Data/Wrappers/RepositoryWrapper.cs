@@ -6,7 +6,6 @@
         private IBusinessRepository? _business;
         private ICustomerRepository? _customer;
         private IMessageRepository? _message;
-        private IShopRepository? _shop;
         private IUnitOfWork? _unitOfWork;
 
         public RepositoryWrapper(EPDbContext context) => _context = context;
@@ -19,9 +18,6 @@
 
         public IMessageRepository Message 
             => _message is null ? _message = new MessageRepository(_context) : _message;
-
-        public IShopRepository Shop
-            => _shop is null ? _shop = new ShopRepository(_context) : _shop;
 
         public IUnitOfWork UnitOfWork 
             => _unitOfWork is null ? _unitOfWork = new UnitOfWork(_context) : _unitOfWork;

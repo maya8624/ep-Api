@@ -17,6 +17,6 @@ global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Http;
 global using System;
 global using ep.Domain.Models;
-global using ep.Contract.Dtos;
+global using ep.Contract.RequestModels;
 global using ep.Service.Interfaces;
 global using ep.Service.Services;

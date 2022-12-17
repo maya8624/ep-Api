@@ -56,5 +56,27 @@ namespace ep.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        //[ProducesResponseType(typeof(ShopRequest), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[HttpPut("update")]
+        //public async Task<IActionResult> PutShopAsync([FromBody] ShopEditDto editDto)
+        //{
+        //    try
+        //    {
+        //        var shopId = await _service.PutShopAsync(editDto);
+        //        if (shopId == 0)
+        //        {
+        //            return BadRequest("no shop.");
+        //        }
+        //        return Ok(shopId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.Message, ex);
+        //        return StatusCode(500, ex.Message);
+        //    }
+        //}
     }
 }

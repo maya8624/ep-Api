@@ -1,30 +1,33 @@
 ﻿using AutoMapper;
 using ep.Data.Wrappers;
-using ep.Contract.Dtos;
 using ep.Service.Services;
 using Moq;
+using ep.Contract.RequestModels;
 
 namespace ep.Tests.Services
 {
-    public class ShopServiceTests
+    public class BusinessServiceTests
     {
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IRepositoryWrapper> _repository;
-        private readonly ShopService _service;
-        private readonly ShopCreateDto _createDto;
+        private readonly BusinessService _service;
+        private readonly BusinessRequest _business;
 
-        public ShopServiceTests()
+        public BusinessServiceTests()
         {
             _mapper = new Mock<IMapper>();
             _repository = new Mock<IRepositoryWrapper>();
-            _service = new ShopService(_mapper.Object, _repository.Object);
-            _createDto = new ShopCreateDto
+            _service = new BusinessService(_mapper.Object, _repository.Object);
+            _business = new BusinessRequest
             {
                 ABN = "123 456",
                 Address = "Sydney",
                 Owner = "Owner",
                 Name = "Charllet",
-                Telephone = "789 102"
+                Phone = "789 102",
+                Email = "andy@domain.com",
+                Latitude = "",
+                Longitude = ""
             };
         }
 

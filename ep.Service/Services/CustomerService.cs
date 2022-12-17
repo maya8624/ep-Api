@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using ep.API.Service.Hubs;
 using Newtonsoft.Json;
 using ep.Service.Cryptograph;
-using ep.Contract.Dtos;
+using ep.Contract.RequestModels;
 
 namespace ep.Service.Services
 {
@@ -26,13 +26,14 @@ namespace ep.Service.Services
             return await _repository.Customer.GetTodaysCustomers(shopId);
         }
 
-        public async Task CreateCustomerAsync(CustomerCreateDto dto)
+        public async Task CreateCustomerAsync(CustomerRequest request)
         {
             try
             {
-                var shop = await _repository.Shop.GetById(dto.Qi);
-                var orderNo = CryptoService.Decrypt(shop.Key, dto.Qv, dto.Qo);
-                var customer = _mapper.Map<Customer>(dto);
+                var shop = await _repository.Business.GetById(request.Qi);
+                var orderNo = CryptoService.Decrypt(shop.Key, request.Qv, request.Qo);
+
+                var customer = _mapper.Map<Customer>(request);
                 customer.OrderNo = orderNo;
                 var json = JsonConvert.SerializeObject(customer);
                 

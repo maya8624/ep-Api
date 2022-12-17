@@ -28,8 +28,9 @@ namespace ep.API.Extensions
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-            services.AddScoped<IShopService, ShopService>();
             services.AddScoped<IValidator<BusinessRequest>, BusinessValidator>();
+            services.AddScoped<IValidator<CustomerRequest>, CustomerValidator>();
+            services.AddScoped<IValidator<MessageRequest>, MessageValidator>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EP", Version = "v1" });

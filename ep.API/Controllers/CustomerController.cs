@@ -1,5 +1,5 @@
 ﻿using ep.API.Service.Hubs;
-using ep.Contract.Dtos;
+using ep.Contract.RequestModels;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Controllers
@@ -43,11 +43,11 @@ namespace ep.API.Controllers
             }
         }
 
-        [ProducesResponseType(typeof(CustomerCreateDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CustomerRequest), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("SaveCustomer")]
-        public async Task<ActionResult> SaveCustomer([FromBody] CustomerCreateDto customerCreateDto)
+        public async Task<ActionResult> SaveCustomer([FromBody] CustomerRequest customerCreateDto)
         {
             try
             {

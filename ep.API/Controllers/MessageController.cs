@@ -1,8 +1,9 @@
-﻿using ep.Contract.Dtos;
+﻿using ep.Contract.RequestModels;
+using ep.Contract.ViewModels;
 using ep.Service.Email;
 
 namespace ep.API.Controllers
-{   
+{
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -25,7 +26,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("create")]
-        public async Task<IActionResult> PostMessage(MessageCreateDto createDto)
+        public async Task<IActionResult> PostMessage(MessageRequest createDto)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("email")]
-        public async Task<IActionResult> SendEmail([FromBody] EmailReadDto email)
+        public async Task<IActionResult> SendEmail([FromBody] EmailView email)
         {
             try
             {
