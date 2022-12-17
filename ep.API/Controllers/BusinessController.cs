@@ -22,7 +22,7 @@ namespace ep.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<BusinessView>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("GetBusinessesAsync")]
+        [Route("businesses")]
         [HttpGet()]
         public async Task<IActionResult> GetBusinessesAsync()
         {
@@ -41,9 +41,9 @@ namespace ep.API.Controllers
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("SaveBusiness")]
+        [Route("create")]
         [HttpPost()]
-        public async Task<IActionResult> SaveBusiness(BusinessRequest request)
+        public async Task<IActionResult> SaveBusinessAsync(BusinessRequest request)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace ep.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error {nameof(SaveBusiness)}, message| {ex.Message}", ex);
+                _logger.LogError($"Error {nameof(SaveBusinessAsync)}, message| {ex.Message}", ex);
                 return StatusCode(500, ex.Message);
             }
         }

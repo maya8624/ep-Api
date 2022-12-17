@@ -14,9 +14,9 @@ namespace ep.API.Extensions
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:3000")
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod()
-                                        .AllowCredentials();
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                     });
             });
 

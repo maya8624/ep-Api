@@ -46,8 +46,6 @@ namespace ep.API
                         
             app.UseHttpsRedirection();
 
-            //app.UseCors("ClientPermission");
-
             app.UseRouting();
             //app.UseAuthentication();
             app.UseAuthorization();
