@@ -1,6 +1,6 @@
 ﻿namespace ep.Contract.ViewModels
 {
-    public class BusinessView
+    public class BusinessView : BaseView
     {
         public int Id { get; set; }
         public string? ABN { get; set; }
