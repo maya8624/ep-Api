@@ -19,7 +19,7 @@ namespace ep.API.Controllers
             _service = service;
         }
 
-        [ProducesResponseType(typeof(IEnumerable<BusinessView>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseView<IEnumerable<BusinessView>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("businesses")]

@@ -1,4 +1,5 @@
-﻿using ep.Contract.RequestModels;
+﻿using ep.Contract.Extensions;
+using ep.Contract.RequestModels;
 using ep.Contract.ViewModels;
 using ep.Data.Wrappers;
 using ep.Service.Interfaces;
@@ -16,11 +17,14 @@ namespace ep.Service.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<BusinessView>> GetBusinessesAsync()
+        public async Task<ResponseView<IEnumerable<BusinessView>>> GetBusinessesAsync()
         {
             var businesses = await _repository.Business.GetAllAsync();
+            var totalCount = 1;
             var data = _mapper.Map<IEnumerable<Business>, IEnumerable<BusinessView>>(businesses);
-            return data;
+            var response = data.ToResponse(totalCount);
+
+            return response;
         }
 
         public async Task SaveBusinessAsync(BusinessRequest request)
