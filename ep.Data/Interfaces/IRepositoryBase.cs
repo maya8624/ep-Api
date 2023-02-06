@@ -3,7 +3,7 @@
     public interface IRepositoryBase<T>
     {
         Task CreateAsync(T entity);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IList<T>> GetAllAsync();
         Task<T> GetById(int id);
         Task<IEnumerable<T>> GetByCondition(Expression<Func<T, bool>> expression);
         void Update(T entity);

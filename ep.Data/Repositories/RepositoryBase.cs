@@ -15,7 +15,7 @@
         public void Delete(T entity)
             => _context.Set<T>().Remove(entity);
 
-        public async Task<IEnumerable<T>> GetAllAsync() 
+        public async Task<IList<T>> GetAllAsync() 
             => await _context.Set<T>().ToListAsync();
 
         public async Task<IEnumerable<T>> GetByCondition(Expression<Func<T, bool>> expression)

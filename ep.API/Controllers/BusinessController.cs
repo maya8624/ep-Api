@@ -23,12 +23,12 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("businesses")]
-        [HttpGet()]
-        public async Task<IActionResult> GetBusinessesAsync()
+        [HttpPost()]
+        public async Task<IActionResult> GetBusinessesAsync(BusinessSearchRequest request)
         {
             try
             {
-                var result = await _service.GetBusinessesAsync();
+                var result = await _service.GetBusinessesAsync(request);
                 return Ok(result);
             }
             catch (Exception ex)

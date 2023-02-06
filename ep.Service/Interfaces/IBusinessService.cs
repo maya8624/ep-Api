@@ -5,7 +5,7 @@ namespace ep.Service.Interfaces
 {
     public interface IBusinessService
     {
-        Task<ResponseView<IEnumerable<BusinessView>>> GetBusinessesAsync();
+        Task<ResponseView<IEnumerable<BusinessView>>> GetBusinessesAsync(BusinessSearchRequest request);
         Task SaveBusinessAsync(BusinessRequest request);
     }
 }

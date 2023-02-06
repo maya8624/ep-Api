@@ -11,11 +11,13 @@ namespace ep.Data.Repositories
             _context = context;
         }
 
-        public void GetBusinesses(int take, int skip)
+        public async Task<IList<Business>> GetBusinessesAsync(int skip, int take)
         {
-            _context.Business.AsNoTracking()
+            return await _context.Business
+                ?.AsNoTracking()
                 ?.Skip(skip)
-                ?.Take(take);
+                ?.Take(take)
+                ?.ToListAsync();
         }
     }
 }
