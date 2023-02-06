@@ -11,10 +11,14 @@ namespace ep.Data.Repositories
             _context = context;
         }
 
-        public async Task<IList<Business>> GetBusinessesAsync(int skip, int take)
+        public async Task<IList<Business>> GetBusinessesAsync(string? name, int skip, int take)
         {
-            return await _context.Business
-                ?.AsNoTracking()
+            var data = _context.Business?.AsNoTracking();
+
+            if (string.IsNullOrEmpty(name) is false)
+                data = data?.Where(x => x.Name!.Contains(name));
+
+            return await data
                 ?.Skip(skip)
                 ?.Take(take)
                 ?.ToListAsync();

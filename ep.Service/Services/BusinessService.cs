@@ -22,7 +22,7 @@ namespace ep.Service.Services
         {
             var businesses = await _repository
                 .Business
-                .GetBusinessesAsync(request.Skip ?? BusinessConstant.Skip, request.Take ?? BusinessConstant.Take);
+                .GetBusinessesAsync(request.Name, request.Skip ?? BusinessConstant.Skip, request.Take ?? BusinessConstant.Take);
 
             var totalCount = businesses.Count;
             var data = _mapper.Map<IEnumerable<Business>, IEnumerable<BusinessView>>(businesses);
