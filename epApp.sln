@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.Service", "ep.Service\ep
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.Contract", "ep.Contract\ep.Contract.csproj", "{DAD08408-1E95-4898-86AC-EA1B33EDFF31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ep.DataMigration", "ep.DataMigration\ep.DataMigration.csproj", "{1B33CCCF-63E1-4DAD-8F55-F020D2065202}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ep.DataMigration", "ep.DataMigration\ep.DataMigration.csproj", "{1B33CCCF-63E1-4DAD-8F55-F020D2065202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ep.Framework", "ep.Framework\ep.Framework.csproj", "{15D06969-A9F0-4380-A96A-248B8ADCB637}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{1B33CCCF-63E1-4DAD-8F55-F020D2065202}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B33CCCF-63E1-4DAD-8F55-F020D2065202}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B33CCCF-63E1-4DAD-8F55-F020D2065202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15D06969-A9F0-4380-A96A-248B8ADCB637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15D06969-A9F0-4380-A96A-248B8ADCB637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15D06969-A9F0-4380-A96A-248B8ADCB637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15D06969-A9F0-4380-A96A-248B8ADCB637}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
