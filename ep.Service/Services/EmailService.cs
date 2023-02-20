@@ -1,9 +1,4 @@
-﻿using ep.Service.Email;
-using ep.Service.Interfaces;
-using MailKit.Net.Smtp;
-using MimeKit;
-
-namespace ep.Service.Services
+﻿namespace ep.Service.Services
 {
     public class EmailService : IEmailService
     {

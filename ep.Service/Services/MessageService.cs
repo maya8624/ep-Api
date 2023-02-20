@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using ep.Service.Interfaces;
-using ep.Data.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ep.Service.Services
+﻿namespace ep.Service.Services
 {
     public class MessageService : IMessageService
     {

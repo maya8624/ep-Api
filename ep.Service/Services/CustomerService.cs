@@ -1,12 +1,4 @@
-﻿using ep.Service.Interfaces;
-using ep.Data.Wrappers;
-using Microsoft.AspNetCore.SignalR;
-using ep.API.Service.Hubs;
-using Newtonsoft.Json;
-using ep.Service.Cryptograph;
-using ep.Contract.RequestModels;
-
-namespace ep.Service.Services
+﻿namespace ep.Service.Services
 {
     public class CustomerService : ICustomerService
     {
