@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ep.Contract\ep.Contract.csproj" />
     <ProjectReference Include="..\ep.Data\ep.Data.csproj" />
+    <ProjectReference Include="..\ep.Framework\ep.Framework.csproj" />
   </ItemGroup>
 
 </Project>

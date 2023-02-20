@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ep.Data\ep.Data.csproj" />
     <ProjectReference Include="..\ep.Domain\ep.Domain.csproj" />
+    <ProjectReference Include="..\ep.Framework\ep.Framework.csproj" />
     <ProjectReference Include="..\ep.Service\ep.Service.csproj" />
   </ItemGroup>
 </Project>

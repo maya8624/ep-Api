@@ -1,8 +1,9 @@
 ﻿using ep.Contract.Constraints;
 using ep.Contract.Extensions;
-using ep.Contract.RequestModels;
 using ep.Contract.ViewModels;
 using ep.Data.Wrappers;
+using ep.Framework;
+using ep.Framework.Exceptions;
 using ep.Service.Interfaces;
 
 namespace ep.Service.Services
@@ -23,6 +24,9 @@ namespace ep.Service.Services
             var businesses = await _repository
                 .Business
                 .GetBusinessesAsync(request.Name, request.Skip ?? BusinessConstant.Skip, request.Take ?? BusinessConstant.Take);
+
+            if (businesses is null)
+                throw new BusinessException(ErrorCodeConstants.NotFoundErrorCode, "Businesses not found");
 
             var totalCount = businesses.Count;
             var data = _mapper.Map<IEnumerable<Business>, IEnumerable<BusinessView>>(businesses);

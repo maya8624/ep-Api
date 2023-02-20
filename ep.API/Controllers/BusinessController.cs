@@ -8,7 +8,7 @@ namespace ep.API.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
 
-    public class BusinessController : ControllerBase
+    public class BusinessController : CustomControllerBase
     {
         private readonly ILogger<BusinessController> _logger;
         private readonly IBusinessService _service;
@@ -34,7 +34,7 @@ namespace ep.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Error {nameof(GetBusinessesAsync)}, message| {ex.Message}", ex);
-                return StatusCode(500, ex.Message);
+                return HandleException(ex);
             }
         }
 
