@@ -23,6 +23,7 @@ namespace ep.API.Extensions
             services.AddAutoMapper(typeof(APIProfile));
             services.AddHttpClient();
             services.AddControllers();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IBusinessService, BusinessService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IEmailService, EmailService>();
