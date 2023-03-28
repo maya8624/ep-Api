@@ -6,7 +6,9 @@
         private IBusinessRepository? _business;
         private ICustomerRepository? _customer;
         private IMessageRepository? _message;
-        private IUnitOfWork? _unitOfWork;
+        private IUnitOfWork _unitOfWork;
+        private IUserRepository _user;
+
 
         public RepositoryWrapper(EPDbContext context) => _context = context;
 
@@ -22,5 +24,7 @@
         public IUnitOfWork UnitOfWork 
             => _unitOfWork is null ? _unitOfWork = new UnitOfWork(_context) : _unitOfWork;
 
+        public IUserRepository User
+            => _user is null ? _user = new UserRepository(_context) : _user;
     }
 }

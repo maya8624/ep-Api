@@ -21,7 +21,7 @@
         public async Task<IEnumerable<T>> GetByCondition(Expression<Func<T, bool>> expression)
         => await _context.Set<T>().Where(expression).ToListAsync();
 
-        public async Task<T> GetById(int id) 
+        public async Task<T> GetByIdAsync(int id) 
             => await _context.Set<T>().FindAsync(id);
 
         public void Update(T entity) 

@@ -1,6 +1,7 @@
 ﻿global using AutoMapper;
 global using ep.API.Service.Hubs;
 global using ep.Contract.RequestModels;
+global using ep.Data.Persistant;
 global using ep.Domain.Models;
 global using ep.Contract.Constraints;
 global using ep.Contract.Extensions;

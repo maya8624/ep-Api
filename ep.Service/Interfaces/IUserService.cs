@@ -2,6 +2,7 @@
 {
     public interface IUserService
     {
-        User GetUser();
+        Task<User> GetUserAsync(int id);
+        Task RegisterAsync(RegisterRequest request);
     }
 }

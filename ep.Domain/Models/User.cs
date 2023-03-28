@@ -7,8 +7,8 @@
         public string? Email { get; set; }
         public string? Role { get; set; }
         public string? Password { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
-        public DateTimeOffset UpdatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset UpdatedOn { get; set; } = DateTimeOffset.UtcNow;
         public ICollection<UserToken>? UserTokens { get; set; }
     }
 }

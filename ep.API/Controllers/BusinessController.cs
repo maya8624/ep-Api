@@ -1,8 +1,4 @@
-﻿using ep.Contract.RequestModels;
-using ep.Contract.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ep.API.Controllers
+﻿namespace ep.API.Controllers
 {
     [ApiController]
     [Produces("application/json")]
@@ -19,7 +15,7 @@ namespace ep.API.Controllers
             _service = service;
         }
 
-        [ProducesResponseType(typeof(ResponseView<IEnumerable<BusinessView>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseView<IEnumerable<BusinessView>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("businesses")]

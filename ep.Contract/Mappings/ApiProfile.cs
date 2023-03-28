@@ -16,6 +16,7 @@ namespace ep.Contract.Mappings
             CreateMap<MessageRequest, Message>();
             CreateMap<Business, BusinessView>();
             CreateMap<BusinessRequest, Business>();
+            CreateMap<RegisterRequest, User>();
         }
     }
 }
