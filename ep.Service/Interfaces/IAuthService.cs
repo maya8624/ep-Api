@@ -3,7 +3,7 @@
     public interface IAuthService
     {
         string CreateToken(UserRequest request);
-        string GetToken(UserRequest request);
-        string RefreshToken();
+        Task<UserTokenView> GetTokenAsync(UserRequest request);
+        Task<string> GetRefreshTokenAsync(string refreshToken);
     }
 }

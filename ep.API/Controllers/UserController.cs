@@ -8,6 +8,12 @@
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _service;
 
+        public UserController(ILogger<UserController> logger, IUserService service)
+        {
+            _logger = logger;
+            _service = service;
+        }
+
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -26,7 +32,6 @@
                 return HandleException(ex);
             }
         }
-
 
 
         [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]

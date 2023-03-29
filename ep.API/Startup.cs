@@ -3,6 +3,7 @@ using ep.Service.Email;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 namespace ep.API
@@ -18,7 +19,10 @@ namespace ep.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {          
+        {
+            services.AddHttpContextAccessor();
+            //Services.AddEndpointsApiExplorer();
+
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
@@ -31,6 +35,18 @@ namespace ep.API
             services.AddFluentValidationAutoValidation();
             services.AddSignalR()
             .AddAzureSignalR("Endpoint=https://andytestsignalr.service.signalr.net;AccessKey=FE3k5ebX2WowT11Xl9zJN7m3SCePxqYSwc0qJEKWqpQ=;Version=1.0;");
+
+            services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("outh2", new OpenApiSecurityScheme
+                {
+                    Description = "Authorization header using the Bearer scheme(\"bearer {token\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                });
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                  .AddJwtBearer(options =>

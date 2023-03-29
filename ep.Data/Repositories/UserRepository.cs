@@ -8,5 +8,12 @@
         {
             _context = context;
         }
+
+        public async Task<User?> GetUserByEmailAsync(string email, string password)
+        {
+            return await _context
+                .Users
+                .FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+        }
     }
 }

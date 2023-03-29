@@ -15,8 +15,8 @@ namespace ep.Contract.RequestModels
         public RegisterValidator()
         {
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Email).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.Email).EmailAddress();
+            RuleFor(x => x.Password).MinimumLength(6);
             RuleFor(x => x.Role).NotEmpty();
         }
     }

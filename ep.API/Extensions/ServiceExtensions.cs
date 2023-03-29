@@ -30,6 +30,7 @@ namespace ep.API.Extensions
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IValidator<BusinessRequest>, BusinessValidator>();
             services.AddScoped<IValidator<CustomerRequest>, CustomerValidator>();
             services.AddScoped<IValidator<MessageRequest>, MessageValidator>();

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ep.Service.Cryptograph;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Security.Cryptography;
 using Xunit;
@@ -8,21 +9,17 @@ namespace ep.Tests.Services
     public class CryptoServiceTests
     {
         [Fact]
-        public void GenerateHahsedKey()
+        public void GenerateRandomKey_WhenCalles_ShouldReturnRandomHashedKey()
         {
-            byte[] key = new byte[32]; //256 bits (1 byte = 8bits)
+            var result = CryptoService.GenerateRandomKey();
+            Assert.NotEmpty(result);
+        }
 
-            //Use cryptogrphically strong random number generator
-            RandomNumberGenerator rng = RandomNumberGenerator.Create();
-
-            var Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
-            //Get enough random bytes to fill the given buffer
-            rng.GetBytes(key);
-
-            //Convert to hex for key storage (can also use base64)
-            var hex = Convert.ToBase64String(key);
-
-            Assert.NotEmpty(hex);
+        [Fact]
+        public void GenerateSalt_WhenCalled_ShouldRetrunHashedSaltString()
+        {
+            var result = CryptoService.GenerateSalt();            
+            Assert.NotEmpty(result);
         }
     }
 }

@@ -22,7 +22,7 @@
         {
             try
             {
-                var shop = await _repository.Business.GetById(request.Qi);
+                var shop = await _repository.Business.GetByIdAsync(request.Qi);
                 var orderNo = CryptoService.Decrypt(shop.Key, request.Qv, request.Qo);
 
                 var customer = _mapper.Map<Customer>(request);

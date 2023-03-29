@@ -1,4 +1,6 @@
-﻿namespace ep.Service.Cryptograph
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+
+namespace ep.Service.Cryptograph
 {
     public class CryptoService
     {  
@@ -20,7 +22,7 @@
 
         public string Encrypt(string plainText)
         {
-            var key = GetKey();
+            var key = GenerateRandomKey();
             Aes cipher = CreateCipher(key);
 
             //show the IV on page (will use for decrypt, normally send in clear along with ciphertext)
@@ -52,7 +54,7 @@
             return originPlainText;
         }
 
-        public string GetKey()
+        public static string GenerateRandomKey()
         {
             byte[] key = new byte[32]; //256 bits (1 byte = 8bits)
 
@@ -65,6 +67,30 @@
             //Convert to hex for key storage (can also use base64)
             var hex = Convert.ToBase64String(key);
             return hex;
+        }
+
+        public static string GenerateSalt()
+        {
+            byte[] salt = new byte[128 / 8];
+
+            RandomNumberGenerator rng = RandomNumberGenerator.Create();
+            rng.GetNonZeroBytes(salt);
+
+            return Convert.ToBase64String(salt);
+        }
+
+        public static string HashPassword(string text, string salt)
+        {
+            byte[] secret = Encoding.UTF8.GetBytes(salt);
+            string hashedText = Convert.ToBase64String(KeyDerivation.Pbkdf2
+            (
+                   password: text,
+                   salt: secret,
+                   prf: KeyDerivationPrf.HMACSHA256,
+                   iterationCount: 10000,
+                   numBytesRequested: 256 / 8)
+            );
+            return hashedText;
         }
     }
 }
