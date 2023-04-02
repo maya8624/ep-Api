@@ -2,6 +2,6 @@
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-        Task<User?> GetUserByEmailAsync(string email, string password);
+        Task<User?> GetUserByEmailAsync(string email);
     }
 }

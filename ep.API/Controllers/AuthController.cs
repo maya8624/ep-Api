@@ -1,4 +1,6 @@
-﻿namespace ep.API.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace ep.API.Controllers
 {
     [ApiController]
     [Produces("application/json")]
@@ -16,11 +18,12 @@
 
         [Route("login")]
         [HttpPost()]
-        public IActionResult Login(UserRequest request)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(UserRequest request)
         {
             try
             {
-                var token = _authService.GetTokenAsync(request);
+                var token = await _authService.GetTokenAsync(request);
                 return Ok(token);
             }
             catch (Exception ex)

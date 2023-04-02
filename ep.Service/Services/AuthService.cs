@@ -1,7 +1,4 @@
-﻿using ep.Domain.Models;
-using Org.BouncyCastle.Asn1.Ocsp;
-
-namespace ep.Service.Services
+﻿namespace ep.Service.Services
 {
     public class AuthService : IAuthService
     {
@@ -48,7 +45,7 @@ namespace ep.Service.Services
 
         public async Task<UserTokenView> GetTokenAsync(UserRequest request)
         {
-            var user = await _repository.User.GetUserByEmailAsync(request.Email!, request.Password!);
+            var user = await _repository.User.GetUserByEmailAsync(request.Email!);
             if (user == null) ThrowBusinessException();
             user!.Role = request.Role;
 
@@ -80,7 +77,6 @@ namespace ep.Service.Services
             //var refreshToken = await CreateRefreshTokenAsync(id: user.Id);
             throw new NotImplementedException();
         }
-
      
         private async Task<string> CreateRefreshTokenAsync(int id, int days = Constants.DefaultTokenExpireDays)
         {
@@ -93,6 +89,7 @@ namespace ep.Service.Services
 
             await _repository.UserToken.CreateAsync(userToken);
             await _unitOfWork.CompleteAsync();
+
             return userToken.RefreshToken;
         }
 
