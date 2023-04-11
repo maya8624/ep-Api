@@ -9,6 +9,8 @@
    
 - Custom Exceptions 
 
+- Cryptograph
+
 - Repository Pattern
       
 - Unit Tests
