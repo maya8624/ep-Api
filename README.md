@@ -1,4 +1,4 @@
-# Rest API Projcect
+# Rest API Project
 - The backend provides various API endpoints that can be consumed by the frontend to accessa and manipulate data.
 
 # Features
