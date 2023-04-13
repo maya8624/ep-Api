@@ -16,3 +16,5 @@
 4. Repository Pattern
       
 5. Unit Tests
+
+6. Azure Deveops CI/CD Pipeline
