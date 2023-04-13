@@ -2,7 +2,7 @@
 - The backend provides various API endpoints that can be consumed by the frontend to accessa and manipulate data.
 
 # Environments
-- .Net 6, C#, MS-SQL, EF6, xUnit, Moq, Fluent Validation
+- .Net 6, C#, MS-SQL, EF6, xUnit, Moq, Fluent Validation, AutoMapper
 
 # Features
 1. Token Authentication: 
