@@ -22,9 +22,9 @@ namespace ep.API.Controllers
         public async Task<IActionResult> Login(UserRequest request)
         {
             try
-            {
-                var token = await _authService.GetTokenAsync(request);
-                return Ok(token);
+            {            
+                var userToken = await _authService.GetTokenAsync(request);
+                return Ok(userToken);
             }
             catch (Exception ex)
             {
@@ -35,16 +35,16 @@ namespace ep.API.Controllers
 
         [Route("refresh")]
         [HttpPost()]
-        public async Task<IActionResult> GetRefreshToken(string refreshToken)
+        public async Task<IActionResult> SilentLogin(SilentLoginRequest request)
         {
             try
             {
-                var token = await _authService.GetRefreshTokenAsync(refreshToken);
+                var token = await _authService.SilentLoginAsync(request);
                 return Ok(token);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error {nameof(GetRefreshToken)}, message: {ex.Message}", ex);
+                _logger.LogError($"Error {nameof(SilentLogin)}, message: {ex.Message}", ex);
                 return HandleException(ex);
             }
         }

@@ -2,8 +2,8 @@
 {
     public interface IAuthService
     {
-        string CreateToken(UserRequest request);
+        string CreateToken(List<Claim> claims);
         Task<UserTokenView> GetTokenAsync(UserRequest request);
-        Task<string> GetRefreshTokenAsync(string refreshToken);
+        Task<UserTokenView> SilentLoginAsync(SilentLoginRequest request);
     }
 }

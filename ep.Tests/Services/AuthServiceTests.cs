@@ -31,7 +31,7 @@ namespace ep.Tests.Services
             _unitOfWork = new Mock<IUnitOfWork>();
             _service = new AuthService(_configuration.Object, _mapper.Object, _repository.Object, _unitOfWork.Object);
 
-             _userRequest = new UserRequest
+            _userRequest = new UserRequest
             {
                 Email = "test@example.com",
                 Password = "Pa$$w0rd",
@@ -102,6 +102,25 @@ namespace ep.Tests.Services
             // Act & Assert
             await Assert.ThrowsAsync<BusinessException>(() => _service.GetTokenAsync(_userRequest));
         }
+
+        //[Fact]
+        //public void RefreshToken_ReturnRefreshToken_WhenCalled()
+        //{
+        //    // Arrange
+        //    var oldRefreshToken = "old_refresh_token";
+        //    var userToken = new UserToken
+        //    {
+        //        RefreshToken = "refresh_token_string",
+        //        TokenExpires = DateTime.UtcNow.AddDays(1),
+        //        UserId = 1
+        //    };
+
+        //    _repository.Setup(x => x.UserToken.GetLatestUserTokenByUserId(It.IsAny<int>())).ReturnsAsync(userToken);
+
+        //    // Act
+        //    var result = _service.RefreshToken(oldRefreshToken, userToken.UserId);
+
+        //}
     }
 }
 

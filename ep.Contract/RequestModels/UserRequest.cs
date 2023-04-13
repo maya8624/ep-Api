@@ -4,9 +4,9 @@ namespace ep.Contract.RequestModels
 {
     public class UserRequest
     {
-        public string? Email { get; set; }
-        public string? Password { get; set; }
-        public string? Role { get; set; }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
         public string? RefreshToken { get; set; }
     }
 
@@ -16,6 +16,7 @@ namespace ep.Contract.RequestModels
         {
             RuleFor(x => x.Email).EmailAddress();
             RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.Role).NotEmpty();
         }
     }
 }

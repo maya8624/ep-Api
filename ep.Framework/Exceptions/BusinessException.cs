@@ -2,7 +2,7 @@
 
 namespace ep.Framework.Exceptions
 {
-    public class BusinessException : Exception, IBusinessException
+    public class BusinessException : Exception, IBaseException
     {
         public string? Details { get; set; }
         public int ErrorCode { get; set; }

@@ -19,7 +19,7 @@
         {            
             var user = await _repository.User.GetByIdAsync(id);
             var respond = _mapper.Map<UserView>(user);
-            return respond ?? throw new BusinessException(ErrorCodeConstants.NotFoundErrorCode, $"User [{id}] not found");
+            return respond ?? throw new BusinessException(ErrorCodeConstants.NotFoundError, $"User [{id}] not found");
         }
 
         public async Task RegisterAsync(RegisterRequest request)

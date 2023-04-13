@@ -19,7 +19,7 @@
                 request.Take ?? BusinessConstant.Take);
 
             if (businesses is null)
-                throw new BusinessException(ErrorCodeConstants.NotFoundErrorCode, "Businesses not found");
+                throw new BusinessException(ErrorCodeConstants.NotFoundError, "Businesses not found");
 
             var totalCount = businesses.Count;
             var data = _mapper.Map<IEnumerable<Business>, IEnumerable<BusinessView>>(businesses);

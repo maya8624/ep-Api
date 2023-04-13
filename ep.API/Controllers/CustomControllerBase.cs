@@ -7,13 +7,13 @@ namespace ep.API.Controllers
     {
         protected IActionResult HandleException<T>(T exception) where T : Exception
         {
-            if (exception is IBusinessException)
+            if (exception is IBaseException)
             {
                 return BadRequest(new ErrorViewModel
                 {
-                    ErrorCode = ((IBusinessException)exception).ErrorCode,
+                    ErrorCode = ((IBaseException)exception).ErrorCode,
                     Message = exception.Message,
-                    Details = ((IBusinessException)exception).Details,
+                    Details = ((IBaseException)exception).Details,
                 });
             }
 

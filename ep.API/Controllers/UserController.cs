@@ -1,4 +1,6 @@
-﻿namespace ep.API.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace ep.API.Controllers
 {
     [ApiController]
     [Produces("application/json")]
@@ -38,7 +40,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("user/{id:int}")]
-        [HttpGet()]
+        [HttpGet(), Authorize]
         public async Task<IActionResult> GetUserAsync(int id)
         {
             try
