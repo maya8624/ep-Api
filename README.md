@@ -5,12 +5,14 @@
 - .Net 6, C#, MS-SQL, EF6, xUnit, Moq, Fluent Validation
 
 # Features
-- Token Authentication: getting a new access token using refresh token using refresh token rotation
+1. Token Authentication: 
+   - Refresh token rotation
+   - Silent login
    
-- Custom Exceptions 
+2. Custom Exceptions 
 
-- Cryptograph
+3. Cryptograph
 
-- Repository Pattern
+4. Repository Pattern
       
-- Unit Tests
+5. Unit Tests
