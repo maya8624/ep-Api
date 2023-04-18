@@ -1,5 +1,6 @@
 ﻿using ep.API.Service.Hubs;
 using ep.Contract.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Controllers
@@ -7,6 +8,7 @@ namespace ep.API.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;

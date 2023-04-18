@@ -3,8 +3,8 @@
 namespace ep.API.Controllers
 {
     [ApiController]
-    [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : CustomControllerBase
     {
         private readonly ILogger<UserController> _logger;
@@ -40,13 +40,13 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("user/{id:int}")]
-        [HttpGet(), Authorize]
+        [HttpGet()]
         public async Task<IActionResult> GetUserAsync(int id)
         {
             try
             {
-                await _service.GetUserAsync(id);
-                return Ok();
+                var user = await _service.GetUserAsync(id);
+                return Ok(user);
             }
             catch (Exception ex)
             {

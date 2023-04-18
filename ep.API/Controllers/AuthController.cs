@@ -19,7 +19,7 @@ namespace ep.API.Controllers
         [Route("login")]
         [HttpPost()]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(UserRequest request)
+        public async Task<IActionResult> Login(LogInRequest request)
         {
             try
             {            

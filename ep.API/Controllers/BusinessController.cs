@@ -1,9 +1,10 @@
-﻿namespace ep.API.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace ep.API.Controllers
 {
     [ApiController]
-    [Produces("application/json")]
     [Route("api/[controller]")]
-
+    [Authorize]
     public class BusinessController : CustomControllerBase
     {
         private readonly ILogger<BusinessController> _logger;

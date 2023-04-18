@@ -21,7 +21,7 @@ namespace ep.Tests.Services
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<IRepositoryWrapper> _repository;
         private readonly Mock<IUnitOfWork> _unitOfWork;
-        private readonly UserRequest _userRequest;
+        private readonly LogInRequest _logInRequest;
 
         public AuthServiceTests()
         {
@@ -31,11 +31,10 @@ namespace ep.Tests.Services
             _unitOfWork = new Mock<IUnitOfWork>();
             _service = new AuthService(_configuration.Object, _mapper.Object, _repository.Object, _unitOfWork.Object);
 
-            _userRequest = new UserRequest
+            _logInRequest = new LogInRequest
             {
                 Email = "test@example.com",
                 Password = "Pa$$w0rd",
-                Role = "user"
             };
         }
 
@@ -46,7 +45,7 @@ namespace ep.Tests.Services
             var user = new User
             {
                 Id = 1,
-                Email = _userRequest.Email,
+                Email = _logInRequest.Email,
                 Password = "XH4u3UzY/wabRFSTFrR9WPesKkLBE5h/7tuHMxk9F/M=",
                 Role = "user",
                 Salt = "oqhceXKsBB/aLQeZlq27gg=="
@@ -59,13 +58,13 @@ namespace ep.Tests.Services
                 UserId = 1
             };
 
-            _repository.Setup(x => x.User.GetUserByEmailAsync(_userRequest.Email!)).ReturnsAsync(user);
+            _repository.Setup(x => x.User.GetUserByEmailAsync(_logInRequest.Email!)).ReturnsAsync(user);
             _mapper.Setup(x => x.Map<UserView>(user)).Returns(new UserView { Id = user.Id });
             _configuration.Setup(x => x.GetSection("AppSettings:Secret").Value).Returns("GMr2Gmhk4IZcTp0lLelxYWLoncGAa8bFwZDCdSLct6M=");
             _repository.Setup(x => x.UserToken.CreateAsync(userToken));
 
             // Act
-            var result = await _service.GetTokenAsync(_userRequest);
+            var result = await _service.GetTokenAsync(_logInRequest);
 
             // Assert
             Assert.NotNull(result);
@@ -81,7 +80,7 @@ namespace ep.Tests.Services
             _repository.Setup(x => x.User.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync((User)null);
 
             // Act & Assert
-            await Assert.ThrowsAsync<BusinessException>(() => _service.GetTokenAsync(_userRequest));
+            await Assert.ThrowsAsync<AuthorizedException>(() => _service.GetTokenAsync(_logInRequest));
         }
 
         [Fact]
@@ -97,10 +96,10 @@ namespace ep.Tests.Services
                 Salt = "oqhceXKsBB/aLQeZlq27gg==",
             };
 
-            _repository.Setup(x => x.User.GetUserByEmailAsync(_userRequest.Email)).ReturnsAsync(user);
+            _repository.Setup(x => x.User.GetUserByEmailAsync(_logInRequest.Email)).ReturnsAsync(user);
 
             // Act & Assert
-            await Assert.ThrowsAsync<BusinessException>(() => _service.GetTokenAsync(_userRequest));
+            await Assert.ThrowsAsync<AuthorizedException>(() => _service.GetTokenAsync(_logInRequest));
         }
 
         //[Fact]
@@ -121,6 +120,15 @@ namespace ep.Tests.Services
         //    var result = _service.RefreshToken(oldRefreshToken, userToken.UserId);
 
         //}
+
+        // create a test for refresh token
+        //[Fact]
+
+
+        // Get average runtime of successful runs in seconds
+        
+
+
     }
 }
 

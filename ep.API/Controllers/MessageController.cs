@@ -1,12 +1,14 @@
 ﻿using ep.Contract.RequestModels;
 using ep.Contract.ViewModels;
 using ep.Service.Email;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ep.API.Controllers
 {
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize]
     public class MessageController : ControllerBase
     {
         private readonly IMapper _mapper;

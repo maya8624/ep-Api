@@ -1,8 +1,4 @@
-﻿using ep.Domain.Models;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Ocsp;
-
-namespace ep.Service.Services
+﻿namespace ep.Service.Services
 {
     public class AuthService : IAuthService
     {
@@ -42,17 +38,16 @@ namespace ep.Service.Services
             throw new AuthorizedException(ErrorCodeConstants.CredentialError, errorMessage);
         }
 
-        public async Task<UserTokenView> GetTokenAsync(UserRequest request)
+        public async Task<UserTokenView> GetTokenAsync(LogInRequest request)
         {
             // TODO: move ThrowAuthorizedException method in a base class
             var user = await _repository.User.GetUserByEmailAsync(request.Email!);
             if (user == null) ThrowAuthorizedException();
-            user!.Role = request.Role;
 
             var isVerified = VerifyPasswordHash(request.Password!, user);
             if (!isVerified) ThrowAuthorizedException();
 
-            var claims = CreateClaims(request.Email, request.Role);
+            var claims = CreateClaims(user.Email!, user.Role!);
             var accessToken = CreateToken(claims);
             var refreshToken = await CreateRefreshTokenAsync(id: user.Id);
 
@@ -127,7 +122,7 @@ namespace ep.Service.Services
             return true;
         }
 
-        private List<Claim> CreateClaims(string email, string role)
+        private static List<Claim> CreateClaims(string email, string role)
         {
             // TODO: if a user is authenticated
             var claims = new List<Claim>
@@ -137,5 +132,8 @@ namespace ep.Service.Services
             };
             return claims;
         }
+
+        // create a method to create a refresh token    
+         
     }
 }
