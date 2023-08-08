@@ -1,8 +1,4 @@
 ﻿using Azure.Security.KeyVault.Keys;
-using Azure.Security.KeyVault.Secrets;
-using ep.Service.Email;
-using Microsoft.AspNetCore.DataProtection;
-using System.Net;
 
 namespace ep.API.Controllers
 {
@@ -13,24 +9,18 @@ namespace ep.API.Controllers
     public class MessageController : CustomControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IMapper _mapper;
         private readonly ILogger<MessageController> _logger;
         private readonly IEmailService _emailService;
         private readonly IMessageService _messageService;
-        private readonly IRepositoryWrapper _repository;
 
         public MessageController(
             IConfiguration configuration,
-            IMapper mapper, 
             ILogger<MessageController> logger, 
-            IRepositoryWrapper repository, 
             IEmailService emailService,
             IMessageService messageService)
         {
             _configuration = configuration;
-            _mapper = mapper;
             _logger = logger;
-            _repository = repository;
             _emailService = emailService;
             _messageService = messageService;
         }
@@ -39,24 +29,17 @@ namespace ep.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("create")]
-        public async Task<IActionResult> PostMessage(MessageRequest createDto)
+        public async Task<IActionResult> PostMessage(MessageRequest request)
         {
             try
             {
-                //TODO: move the logic to the service class
-                if (createDto == null)
-                    return BadRequest();
-                var message = _mapper.Map<Message>(createDto);
-                message.CreatedOn = DateTimeOffset.UtcNow;
-                await _repository.Message.CreateAsync(message);
-                await _repository.UnitOfWork.CompleteAsync();
-                return Ok(message.Id);
+                var result = await _messageService.CreateMessage(request);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex);
-                return StatusCode(500, ex.Message);
-                throw;
+                _logger.LogError($"Error {nameof(PostMessage)}, message| {ex.Message}", ex);
+                return HandleException(ex);
             }
         }
 

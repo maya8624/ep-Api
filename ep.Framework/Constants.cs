@@ -4,6 +4,8 @@
     {
         public const int DefaultTokenExpireMins = 1;
         public const int DefaultTokenExpireDays = 7;
+        public const int MessageTypeSMS = 1;
+        public const int MessageTypeBuzz = 2;
     }
 
     public class ErrorCodeConstants

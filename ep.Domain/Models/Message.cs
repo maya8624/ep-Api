@@ -1,21 +1,19 @@
-﻿using ep.Domain.Enums;
-
-namespace ep.Domain.Models
+﻿namespace ep.Domain.Models
 {
     public class Message
     {
         public int Id { get; set; }
 
-        public string? Icon { get; set; }
+        public DateTimeOffset SentAt { get; set; }
 
-        public MessageStatus Status { get; set; }
+        public int MessageType { get; set; }
 
-        public string? OrderNo { get; set; }
+        public string? Mobile { get; set; }
+
+        public string? Name { get; set; }
 
         public int ShopId { get; set; }
 
-        public string? Text { get; set; }
-
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
     }
 }

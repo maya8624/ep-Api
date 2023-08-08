@@ -20,7 +20,5 @@
         public int ShopId { get; set; }
 
         public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.UtcNow;
-
-        public ICollection<Message>? Messages { get; set; }
     }   
 }

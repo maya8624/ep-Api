@@ -14,10 +14,13 @@ namespace ep.Service.Services
             _repository = wrapper;
         }
 
-        //public async Task CreateMessage(Message message)
-        //{
-        //    await _repository.CreateAsync(message);
-        //}
+        public async Task<bool> CreateMessage(MessageRequest request)
+        {
+            var message = _mapper.Map<Message>(request);
+            await _repository.Message.CreateAsync(message);
+            var result = await _repository.UnitOfWork.CompleteAsync();
+            return result < 1;
+        }
 
         //public async Task<Message> GetMessageByOrderNo(int shopId, string orderNo)
         //{

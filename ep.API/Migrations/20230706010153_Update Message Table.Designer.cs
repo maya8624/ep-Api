@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ep.Data.Persistant;
 
@@ -11,9 +12,11 @@ using ep.Data.Persistant;
 namespace ep.API.Migrations
 {
     [DbContext(typeof(EPDbContext))]
-    partial class EPagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230706010153_Update Message Table")]
+    partial class UpdateMessageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,78 +125,26 @@ namespace ep.API.Migrations
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("MessageSentOn")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("MessageType")
                         .HasColumnType("int");
 
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("SentAt")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("ShopId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("ep.Domain.Models.RequestDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("RequestLimitId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Requests")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("UpdatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RequestLimitId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RequestDetail");
-                });
-
-            modelBuilder.Entity("ep.Domain.Models.RequestLimit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("Limits")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("UpdatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RequestLimit");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.User", b =>
@@ -260,23 +211,11 @@ namespace ep.API.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("ep.Domain.Models.RequestDetail", b =>
+            modelBuilder.Entity("ep.Domain.Models.Message", b =>
                 {
-                    b.HasOne("ep.Domain.Models.RequestLimit", "RequestLimit")
-                        .WithMany()
-                        .HasForeignKey("RequestLimitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ep.Domain.Models.User", "User")
-                        .WithMany("RequestDetails")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RequestLimit");
-
-                    b.Navigation("User");
+                    b.HasOne("ep.Domain.Models.Customer", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.UserToken", b =>
@@ -290,10 +229,13 @@ namespace ep.API.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ep.Domain.Models.Customer", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("ep.Domain.Models.User", b =>
                 {
-                    b.Navigation("RequestDetails");
-
                     b.Navigation("UserTokens");
                 });
 #pragma warning restore 612, 618
