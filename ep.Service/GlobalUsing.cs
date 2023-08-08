@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+global using Azure.Messaging.ServiceBus;
 global using ep.API.Service.Hubs;
 global using ep.Contract.RequestModels;
 global using ep.Data.Persistant;
@@ -23,3 +24,4 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using System.Security.Cryptography;
 global using System.Text;
+global using System.Text.Json;

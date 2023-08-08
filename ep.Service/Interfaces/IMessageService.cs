@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ep.Service.Interfaces
+﻿namespace ep.Service.Interfaces
 {
     public interface IMessageService
     {
-
+        Task<bool> SendMessageResult(SendMessageRequest request);
+        Task SaveMessageResult(string message);
     }
 }

@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Swashbuckle.AspNetCore.Filters;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using FluentValidation.AspNetCore;
-using ep.Service.Email;
-using ep.API.Service.Hubs;
+using Azure.Core;
+//using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
+using System.Net;
+using System;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -52,6 +51,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Host.ConfigureAppConfiguration((context, config) =>
+{
+    var builtConfig = config.Build();
+    var vaultUri = new Uri($"https://andy-kv-test.vault.azure.net/");
+    config.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -76,6 +82,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<CustomerHub>("/hub/customer");
     endpoints.MapControllers();
 });
+
+//app.MapGet("/", () => secretValue);
 
 //app.MapControllers();
 
