@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+﻿using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ep.Service.Services
 {
     public class MessageService : IMessageService
     {
+        private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
-        public MessageService(IMapper mapper, IRepositoryWrapper wrapper)
+        public MessageService(IConfiguration config, IMapper mapper, IRepositoryWrapper wrapper)
         {
+            _config = config;
             _mapper = mapper;
             _repository = wrapper;
         }
@@ -17,7 +18,7 @@ namespace ep.Service.Services
         public async Task<bool> CreateMessage(MessageRequest request)
         {
             var message = _mapper.Map<Message>(request);
-            await _repository.Message.CreateAsync(message);
+            await _repository.Message.Create(message);
             var result = await _repository.UnitOfWork.CompleteAsync();
             return result < 1;
         }
@@ -34,8 +35,12 @@ namespace ep.Service.Services
 
         public async Task<bool> SendMessageResult(SendMessageRequest request)
         {
-            var client = new ServiceBusClient("Endpoint=sb://az-dm-sbq.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=G8ZZpAyBTGq+0I6i7B6UUG68iyAWlx2/9+ASbODJAOQ=");
-            var sender = client.CreateSender("add-dm-result");
+            var serviceBus = _config.GetSection("AzureServiceBus");
+            var connectionString = serviceBus.GetValue<string>("ConnectionString");
+            var queueName = serviceBus.GetValue<string>("QueueName");
+
+            var client = new ServiceBusClient(connectionString);
+            var sender = client.CreateSender(queueName);
 
             var body = JsonSerializer.Serialize(request);
             var message = new ServiceBusMessage(body);
@@ -53,7 +58,7 @@ namespace ep.Service.Services
             var message = JsonSerializer.Deserialize<Message>(messageJson);
             ArgumentNullException.ThrowIfNull(message);
 
-            await _repository.Message.CreateAsync(message);
+            await _repository.Message.Create(message);
             await _repository.UnitOfWork.CompleteAsync();
         }
     }

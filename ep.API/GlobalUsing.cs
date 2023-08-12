@@ -4,7 +4,7 @@ global using ep.API.Extensions;
 global using ep.API.Service.Hubs;
 global using ep.Contract.RequestModels;
 global using ep.Contract.ViewModels;
-global using ep.Data.Persistant;
+global using ep.Data.Persistent;
 global using ep.Data.Wrappers;
 global using ep.Domain.Models;
 global using ep.Service.Email;

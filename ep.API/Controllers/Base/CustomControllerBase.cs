@@ -1,7 +1,6 @@
-﻿using ep.Contract.ViewModels;
-using ep.Framework.Interfaces;
+﻿using ep.Framework.Interfaces;
 
-namespace ep.API.Controllers
+namespace ep.API.Controllers.Base
 {
     public class CustomControllerBase : ControllerBase
     {

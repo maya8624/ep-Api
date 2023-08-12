@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ep.API.Controllers.Base;
+using ep.Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ep.API.Controllers
 {
@@ -7,12 +9,12 @@ namespace ep.API.Controllers
     [Route("auth/[controller]")]
     public class AuthController : CustomControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IAuthLogic _auth;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IAuthService authService, ILogger<AuthController> logger)
+        public AuthController(IAuthLogic auth, ILogger<AuthController> logger)
         {
-            _authService = authService;
+            _auth = auth;
             _logger = logger;
         }
 
@@ -23,7 +25,7 @@ namespace ep.API.Controllers
         {
             try
             {            
-                var userToken = await _authService.GetTokenAsync(request);
+                var userToken = await _auth.GetTokenAsync(request);
                 return Ok(userToken);
             }
             catch (Exception ex)
@@ -39,7 +41,7 @@ namespace ep.API.Controllers
         {
             try
             {
-                var token = await _authService.SilentLoginAsync(request);
+                var token = await _auth.SilentLoginAsync(request);
                 return Ok(token);
             }
             catch (Exception ex)

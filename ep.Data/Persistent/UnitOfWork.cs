@@ -1,4 +1,4 @@
-﻿namespace ep.Data.Persistant
+﻿namespace ep.Data.Persistent
 {
     public class UnitOfWork : IUnitOfWork
     {

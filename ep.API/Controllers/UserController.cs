@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ep.API.Controllers.Base;
+using ep.Logic.Logics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ep.API.Controllers
 {
@@ -8,12 +10,12 @@ namespace ep.API.Controllers
     public class UserController : CustomControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IUserService _service;
+        private readonly IUserLogic _user;
 
-        public UserController(ILogger<UserController> logger, IUserService service)
+        public UserController(ILogger<UserController> logger, IUserLogic user)
         {
             _logger = logger;
-            _service = service;
+            _user = user;
         }
 
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
@@ -25,7 +27,7 @@ namespace ep.API.Controllers
         {
             try
             {
-                await _service.RegisterAsync(request);
+                await _user.Register(request);
                 return Ok();
             }
             catch (Exception ex)
@@ -45,7 +47,7 @@ namespace ep.API.Controllers
         {
             try
             {
-                var user = await _service.GetUserAsync(id);
+                var user = await _user.GetUser(id);
                 return Ok(user);
             }
             catch (Exception ex)

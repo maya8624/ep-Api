@@ -1,4 +1,5 @@
 ﻿using Azure.Security.KeyVault.Keys;
+using ep.API.Controllers.Base;
 
 namespace ep.API.Controllers
 {

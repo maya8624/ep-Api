@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ep.Data.Persistant;
+using ep.Data.Persistent;
 
 #nullable disable
 
@@ -88,8 +88,8 @@ namespace ep.API.Migrations
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("MessageId")
-                        .HasColumnType("int");
+                    b.Property<DateTimeOffset>("DateVisited")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Mobile")
                         .IsRequired()
@@ -99,12 +99,11 @@ namespace ep.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ShopId")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -171,7 +170,7 @@ namespace ep.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RequestDetail");
+                    b.ToTable("RequestDetails");
                 });
 
             modelBuilder.Entity("ep.Domain.Models.RequestLimit", b =>

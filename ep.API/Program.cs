@@ -1,9 +1,3 @@
-using Azure.Core;
-//using Azure.Security.KeyVault.Secrets;
-using Microsoft.Extensions.Configuration;
-using System.Net;
-using System;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -16,7 +10,7 @@ builder.Services.AddSingleton(emailConfig);
 builder.Services.AddServices();
 
 builder.Services.AddDbContext<EPDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.API"))
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EPDBConnection"), x => x.MigrationsAssembly("ep.Api"))
 );
 
 builder.Services.AddSignalR()

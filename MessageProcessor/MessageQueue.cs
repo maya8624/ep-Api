@@ -15,9 +15,7 @@ namespace MessageProcessor
         }
 
         [FunctionName("MessageQueue")]
-        public void Run(
-            [ServiceBusTrigger("add-dm-result", Connection = "MessageQueueConnection")]string message, 
-            ILogger log)
+        public void Run([ServiceBusTrigger("customer_queue", Connection = "MessageQueueConnection")]string message, ILogger log)
         {
             try
             {

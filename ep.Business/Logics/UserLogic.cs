@@ -1,13 +1,14 @@
-﻿namespace ep.Service.Services
+﻿
+namespace ep.Logic.Logics
 {
-    public class UserService : IUserService
+    public class UserLogic : IUserLogic
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IMapper mapper, IRepositoryWrapper repository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
+        public UserLogic(IMapper mapper, IRepositoryWrapper repository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _repository = repository;
@@ -15,14 +16,14 @@
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<UserView> GetUserAsync(int id)
+        public async Task<UserView> GetUser(int id)
         {            
-            var user = await _repository.User.GetByIdAsync(id);
+            var user = await _repository.User.GetById(id);
             var respond = _mapper.Map<UserView>(user);
             return respond ?? throw new BusinessException(ErrorCodeConstants.NotFoundError, $"User [{id}] not found");
         }
 
-        public async Task RegisterAsync(RegisterRequest request)
+        public async Task Register(RegisterRequest request)
         {
             var salt = CryptoService.GenerateSalt();
             var hashedText = CryptoService.HashPassword(request.Password!, salt);
@@ -31,7 +32,7 @@
             user.Password = hashedText;
             user.Salt = salt;
 
-            await _repository.User.CreateAsync(user);
+            await _repository.User.Create(user);
             await _unitOfWork.CompleteAsync();
         }
 

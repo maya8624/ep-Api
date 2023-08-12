@@ -1,9 +1,6 @@
-﻿using ep.Contract.RequestModels;
-using ep.Contract.ViewModels;
-
-namespace ep.Service.Interfaces
+﻿namespace ep.Logic.Interfaces
 {
-    public interface IBusinessService
+    public interface IBusinessLogic
     {
         Task<ResponseView<IEnumerable<BusinessView>>> GetBusinessesAsync(BusinessSearchRequest request);
         Task SaveBusinessAsync(BusinessRequest request);

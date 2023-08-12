@@ -6,7 +6,6 @@ namespace ep.Contract.RequestModels
 {
     public class SendMessageRequest
     {
-
         public string? Mobile { get; set; }
         public string? Name { get; set; }
         public string? OrderNo { get; set; }        

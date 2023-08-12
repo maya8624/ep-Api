@@ -1,5 +1,5 @@
 ﻿using ep.Data.Interfaces;
-using ep.Data.Persistant;
+using ep.Data.Persistent;
 using ep.Data.Wrappers;
 using ep.DataMigration.Models;
 using ep.Domain.Models;
@@ -7,9 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ep.DataMigration
 {
@@ -63,7 +60,7 @@ namespace ep.DataMigration
                 _logger.LogInformation("Saving businesses starts");
 
                 foreach (var business in businesses)
-                    await _repository.Business.CreateAsync(business);
+                    await _repository.Business.Create(business);
 
                 var result = await _unitOfWork.CompleteAsync();
                 _logger.LogInformation($"Saving businesss completed. Total: {result} saved.");

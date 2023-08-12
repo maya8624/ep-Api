@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ep.API\ep.API.csproj" />
+    <ProjectReference Include="..\ep.API\ep.Api.csproj" />
     <ProjectReference Include="..\ep.Data\ep.Data.csproj" />
   </ItemGroup>
 

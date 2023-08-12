@@ -5,9 +5,12 @@
     <UserSecretsId>25fb0d73-b2e9-4bef-b787-732c77823c1e</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="4.3.0" />
+    <Compile Remove="MessageQueue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.ServiceBus" Version="5.11.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Sql" Version="2.0.144" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ep.Service\ep.Service.csproj" />

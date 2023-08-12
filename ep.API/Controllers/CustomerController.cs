@@ -1,7 +1,6 @@
-﻿using ep.API.Service.Hubs;
-using ep.Contract.RequestModels;
+﻿using ep.API.Controllers.Base;
+using ep.Logic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
 
 namespace ep.API.Controllers
 {
@@ -9,57 +8,51 @@ namespace ep.API.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [Authorize]
-    public class CustomerController : ControllerBase
+    public class CustomerController : CustomControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
-        private readonly ICustomerService _service;
+        private readonly ICustomerLogic _customer;
 
-        public CustomerController(ILogger<CustomerController> logger, ICustomerService service)
+        public CustomerController(ILogger<CustomerController> logger, ICustomerLogic customer)
         {
             _logger = logger;
-            _service = service;
+            _customer = customer;
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("GetTodaysCustomers/{shopId:int}/")]
+        [Route("customers/{shopId:int}")]
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetTodaysCustomers(int shopId)
+        public async Task<IActionResult> GetCustomers(int shopId)
         {
             try
             {
-                if (shopId == 0)
-                {
-                    return BadRequest();
-                }
-
-                var result = await _service.GetTodaysCustomers(shopId);                
+                var result = await _customer.GetCustomers(shopId);
                 return Ok(result);
-
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex);
-                return StatusCode(500, ex.Message);
+                _logger.LogError($"Error {nameof(GetCustomers)}, message| {ex.Message}", ex);
+                return HandleException(ex);
             }
         }
 
         [ProducesResponseType(typeof(CustomerRequest), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("SaveCustomer")]
-        public async Task<ActionResult> SaveCustomer([FromBody] CustomerRequest customerCreateDto)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateCustomer([FromBody] CustomerRequest request)
         {
             try
             {
-                await _service.CreateCustomerAsync(customerCreateDto);
+                await _customer.CreateCustomer(request);
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex);
-                return StatusCode(500, ex.Message);
+                _logger.LogError($"Error {nameof(CreateCustomer)}, message| {ex.Message}", ex);
+                return HandleException(ex);
             }
         }
     }

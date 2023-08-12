@@ -1,6 +1,6 @@
-﻿namespace ep.Service.Interfaces
+﻿namespace ep.Logic.Interfaces
 {
-    public interface IAuthService
+    public interface IAuthLogic
     {
         string CreateToken(List<Claim> claims);
         Task<UserTokenView> GetTokenAsync(LogInRequest request);

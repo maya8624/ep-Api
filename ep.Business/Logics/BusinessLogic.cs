@@ -1,11 +1,11 @@
-﻿namespace ep.Service.Services
+﻿namespace ep.Logic.Logics
 {
-    public class BusinessService : IBusinessService
+    public class BusinessLogic : IBusinessLogic
     {
         private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
-        public BusinessService(IMapper mapper, IRepositoryWrapper repository)
+        public BusinessLogic(IMapper mapper, IRepositoryWrapper repository)
         {
             _mapper = mapper;
             _repository = repository;
@@ -31,7 +31,7 @@
         public async Task SaveBusinessAsync(BusinessRequest request)
         {
             var business = _mapper.Map<Business>(request);
-            await _repository.Business.CreateAsync(business);
+            await _repository.Business.Create(business);
             await _repository.UnitOfWork.CompleteAsync();
         }
     }

@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ep.Business\ep.Logic.csproj" />
     <ProjectReference Include="..\ep.Contract\ep.Contract.csproj" />
     <ProjectReference Include="..\ep.Data\ep.Data.csproj" />
     <ProjectReference Include="..\ep.Domain\ep.Domain.csproj" />

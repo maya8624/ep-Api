@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ep.API.Controllers.Base;
+using ep.Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ep.API.Controllers
 {
@@ -8,12 +10,12 @@ namespace ep.API.Controllers
     public class BusinessController : CustomControllerBase
     {
         private readonly ILogger<BusinessController> _logger;
-        private readonly IBusinessService _service;
+        private readonly IBusinessLogic _business;
 
-        public BusinessController(ILogger<BusinessController> logger, IBusinessService service)
+        public BusinessController(IBusinessLogic business, ILogger<BusinessController> logger)
         {
             _logger = logger;
-            _service = service;
+            _business = business;
         }
 
         [ProducesResponseType(typeof(ResponseView<IEnumerable<BusinessView>>), StatusCodes.Status200OK)]
@@ -25,7 +27,7 @@ namespace ep.API.Controllers
         {
             try
             {
-                var result = await _service.GetBusinessesAsync(request);
+                var result = await _business.GetBusinessesAsync(request);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -44,7 +46,7 @@ namespace ep.API.Controllers
         {
             try
             {
-                await _service.SaveBusinessAsync(request);
+                await _business.SaveBusinessAsync(request);
                 return Ok(true);
             }
             catch (Exception ex)
@@ -62,7 +64,7 @@ namespace ep.API.Controllers
         //{
         //    try
         //    {
-        //        var shopId = await _service.PutShopAsync(editDto);
+        //        var shopId = await _business.PutShopAsync(editDto);
         //        if (shopId == 0)
         //        {
         //            return BadRequest("no shop.");

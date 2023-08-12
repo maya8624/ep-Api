@@ -9,18 +9,18 @@
             _context = context;
         }
 
-        public async Task<bool> CheckAnyAsync(int shopId, string orderNo) 
+        public async Task<bool> CheckAny(int shopId) 
             => await _context.Customers
-                    .AnyAsync(c => c.ShopId == shopId && c.OrderNo == orderNo);
+                    .AnyAsync(c => c.ShopId == shopId);
 
-        public async Task<IEnumerable<Customer>> GetTodaysCustomers(int shopId)
+        public async Task<IEnumerable<Customer>> GetCustomers(int shopId, DateTimeOffset date)
         {
-            //TODO: check comparing dates
+            //TODO: class for this query
             var result = await _context.Customers
-                .AsNoTracking()
-                .Where(c => c.ShopId == shopId &&
-                            c.CreatedOn.Date == DateTimeOffset.UtcNow.Date)
+                .Where(x => x.ShopId == shopId)
+                .Where(x => x.CreatedOn.Date == date)
                 .ToListAsync();
+
             return result;
         }
     }

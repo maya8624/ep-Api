@@ -1,4 +1,4 @@
-﻿using ep.Data.Persistant;
+﻿using ep.Data.Persistent;
 using ep.Data.Wrappers;
 using ep.DataMigration;
 using Microsoft.EntityFrameworkCore;
